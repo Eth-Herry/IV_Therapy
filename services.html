@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IV Drip Menu — VIVA Drip</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white: #FFFFFF;
+      --off-white: #F8F8F6;
+      --black: #0A0A0A;
+      --charcoal: #1A1A1A;
+      --gray-100: #F3F3F1;
+      --gray-200: #E8E8E5;
+      --gray-400: #9A9A96;
+      --gray-600: #5A5A56;
+      --blue: #2563EB;
+      --blue-dark: #1D4ED8;
+      --blue-light: #EFF6FF;
+      --blue-mid: #DBEAFE;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'Inter', system-ui, sans-serif;
+      --radius: 12px;
+      --radius-lg: 20px;
+      --shadow-sm: 0 2px 12px rgba(0,0,0,0.06);
+      --shadow-md: 0 8px 32px rgba(0,0,0,0.10);
+      --shadow-lg: 0 20px 60px rgba(0,0,0,0.14);
+      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background-color: var(--off-white);
+      color: var(--black);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 0 5%;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(248,248,246,0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--gray-200);
+      box-shadow: var(--shadow-sm);
+    }
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.6rem;
+      font-weight: 500;
+      color: var(--black);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+    }
+    .nav-logo span { color: var(--blue); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--gray-600);
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      transition: color var(--transition);
+    }
+    .nav-links a:hover { color: var(--black); }
+    .nav-links a.active { color: var(--blue); }
+    .nav-cta {
+      background: var(--blue);
+      color: var(--white) !important;
+      padding: 0.55rem 1.4rem;
+      border-radius: 50px;
+      font-size: 0.85rem !important;
+      font-weight: 600 !important;
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition) !important;
+    }
+    .nav-cta:hover {
+      background: var(--blue-dark) !important;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(37,99,235,0.35) !important;
+    }
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--black);
+      border-radius: 2px;
+    }
+
+    /* PAGE HERO */
+    .page-hero {
+      padding-top: 72px;
+      background: var(--black);
+      color: var(--white);
+      padding-bottom: 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        radial-gradient(circle at 70% 30%, rgba(37,99,235,0.25) 0%, transparent 50%),
+        radial-gradient(circle at 10% 80%, rgba(37,99,235,0.1) 0%, transparent 40%);
+      pointer-events: none;
+    }
+    .page-hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 6rem 5% 5rem;
+    }
+    .page-hero-label {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--blue);
+      background: rgba(37,99,235,0.15);
+      padding: 0.4rem 1rem;
+      border-radius: 50px;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(37,99,235,0.3);
+    }
+    .page-hero-title {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 5vw, 5rem);
+      font-weight: 400;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+    .page-hero-title em { font-style: italic; color: rgba(255,255,255,0.55); }
+    .page-hero-sub {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.6);
+      max-width: 560px;
+      line-height: 1.75;
+      margin-bottom: 3rem;
+    }
+    .page-hero-stats {
+      display: flex;
+      gap: 3rem;
+      padding-top: 3rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .page-hero-stat-num {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+    .page-hero-stat-label {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.45);
+      letter-spacing: 0.04em;
+    }
+
+    /* FILTER BAR */
+    .filter-bar {
+      background: var(--white);
+      padding: 1.5rem 5%;
+      border-bottom: 1px solid var(--gray-200);
+      position: sticky;
+      top: 72px;
+      z-index: 100;
+    }
+    .filter-bar-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .filter-bar-inner::-webkit-scrollbar { display: none; }
+    .filter-btn {
+      flex-shrink: 0;
+      padding: 0.5rem 1.25rem;
+      border-radius: 50px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      border: 1.5px solid var(--gray-200);
+      background: transparent;
+      color: var(--gray-600);
+      cursor: pointer;
+      transition: all var(--transition);
+      white-space: nowrap;
+    }
+    .filter-btn:hover {
+      border-color: var(--blue);
+      color: var(--blue);
+    }
+    .filter-btn.active {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: var(--white);
+    }
+
+    /* SECTION */
+    section { padding: 6rem 5%; }
+    .section-inner { max-width: 1280px; margin: 0 auto; }
+    .section-label {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 3.2vw, 3rem);
+      font-weight: 400;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .section-title em { font-style: italic; }
+    .section-sub {
+      font-size: 0.95rem;
+      color: var(--gray-600);
+      line-height: 1.75;
+      max-width: 540px;
+    }
+
+    /* DRIP CARDS */
+    .drips-section { background: var(--off-white); }
+    .category-block { margin-bottom: 5rem; }
+    .category-block:last-child { margin-bottom: 0; }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--gray-200);
+    }
+    .category-icon {
+      width: 68px; height: 68px;
+      border-radius: 16px;
+      background: var(--blue-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .category-icon img { width: 38px; height: 38px; }
+    .category-name {
+      font-family: var(--serif);
+      font-size: 1.8rem;
+      font-weight: 500;
+      color: var(--black);
+    }
+    .category-count {
+      margin-left: auto;
+      font-size: 0.78rem;
+      color: var(--gray-400);
+      background: var(--gray-100);
+      padding: 0.35rem 0.85rem;
+      border-radius: 50px;
+    }
+
+    .drips-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .drip-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--gray-200);
+      overflow: hidden;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    }
+    .drip-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: transparent;
+    }
+    .drip-card-top {
+      padding: 2rem 2rem 1.5rem;
+      display: flex;
+      gap: 1.25rem;
+      align-items: flex-start;
+    }
+    .drip-card-icon {
+      width: 68px; height: 68px;
+      border-radius: 16px;
+      background: var(--blue-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .drip-card-icon img { width: 38px; height: 38px; }
+    .drip-card-badge {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 0.4rem;
+    }
+    .drip-card-name {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: var(--black);
+      line-height: 1.2;
+      margin-bottom: 0.3rem;
+    }
+    .drip-card-tagline {
+      font-size: 0.82rem;
+      color: var(--gray-400);
+      font-style: italic;
+    }
+    .drip-card-body {
+      padding: 0 2rem 1.5rem;
+    }
+    .drip-card-desc {
+      font-size: 0.875rem;
+      color: var(--gray-600);
+      line-height: 1.75;
+      margin-bottom: 1.25rem;
+    }
+    .drip-card-ingredients {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .ingredient-tag {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--charcoal);
+      background: var(--gray-100);
+      padding: 0.3rem 0.75rem;
+      border-radius: 50px;
+      border: 1px solid var(--gray-200);
+    }
+    .drip-card-footer {
+      padding: 1.25rem 2rem;
+      border-top: 1px solid var(--gray-100);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .drip-meta {
+      display: flex;
+      gap: 1.5rem;
+    }
+    .drip-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+    }
+    .drip-meta-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gray-400);
+    }
+    .drip-meta-value {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--black);
+    }
+    .drip-price {
+      font-family: var(--serif);
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--black);
+    }
+    .drip-price span {
+      font-family: var(--sans);
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: var(--gray-400);
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--blue);
+      color: var(--white);
+      padding: 0.7rem 1.5rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+      white-space: nowrap;
+    }
+    .btn-primary:hover {
+      background: var(--blue-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(37,99,235,0.35);
+    }
+
+    /* FEATURED — FULL WIDTH CARD */
+    .drip-card-featured {
+      background: var(--black);
+      border-radius: var(--radius-lg);
+      border: none;
+      color: var(--white);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      margin-bottom: 1.5rem;
+    }
+    .drip-card-featured .drip-card-badge { color: var(--blue); }
+    .drip-card-featured .drip-card-name { color: var(--white); }
+    .drip-card-featured .drip-card-tagline { color: rgba(255,255,255,0.5); }
+    .drip-card-featured .drip-card-desc { color: rgba(255,255,255,0.6); }
+    .drip-card-featured .drip-card-top { padding: 2.5rem; }
+    .drip-card-featured .drip-card-body { padding: 0 2.5rem 2.5rem; }
+    .drip-card-featured .drip-card-footer {
+      padding: 1.5rem 2.5rem;
+      border-top-color: rgba(255,255,255,0.08);
+    }
+    .drip-card-featured .drip-meta-label { color: rgba(255,255,255,0.4); }
+    .drip-card-featured .drip-meta-value { color: var(--white); }
+    .drip-card-featured .drip-price { color: var(--white); }
+    .drip-card-featured .drip-price span { color: rgba(255,255,255,0.4); }
+    .drip-card-featured .ingredient-tag {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.7);
+    }
+    .featured-visual {
+      background: linear-gradient(135deg, #1a3a6e 0%, #0a1f4e 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      min-height: 320px;
+    }
+    .featured-visual::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(37,99,235,0.5) 0%, transparent 70%);
+    }
+    .featured-visual-img {
+      height: 72%;
+      width: auto;
+      object-fit: contain;
+      position: relative;
+      z-index: 1;
+      filter: drop-shadow(0 20px 40px rgba(0,0,0,0.4));
+    }
+    .featured-badge {
+      position: absolute;
+      top: 1.5rem; left: 1.5rem;
+      background: var(--blue);
+      color: var(--white);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.4rem 0.9rem;
+      border-radius: 50px;
+      z-index: 2;
+    }
+    .featured-left {
+      display: flex;
+      flex-direction: column;
+    }
+    .featured-left .drip-card-top { flex: 1; align-items: flex-start; }
+
+    /* COMPARISON TABLE */
+    .comparison { background: var(--white); }
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    .comparison-table thead tr {
+      background: var(--black);
+      color: var(--white);
+    }
+    .comparison-table th {
+      padding: 1.25rem 1.5rem;
+      text-align: left;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .comparison-table th:first-child { min-width: 200px; }
+    .comparison-table td {
+      padding: 1.1rem 1.5rem;
+      font-size: 0.875rem;
+      color: var(--gray-600);
+      border-bottom: 1px solid var(--gray-100);
+    }
+    .comparison-table tr:last-child td { border-bottom: none; }
+    .comparison-table tr:nth-child(even) td { background: var(--off-white); }
+    .comparison-table .name-cell {
+      font-weight: 600;
+      color: var(--black);
+      font-size: 0.9rem;
+    }
+    .comparison-table .check { color: #22c55e; font-size: 1rem; }
+    .comparison-table .dash { color: var(--gray-400); }
+    .comparison-table .price-cell {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--black);
+    }
+    .comparison-table .book-cell a {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--blue);
+      text-decoration: none;
+    }
+    .comparison-table .book-cell a:hover { text-decoration: underline; }
+
+    /* ADD-ONS */
+    .addons { background: var(--off-white); }
+    .addons-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+    }
+    .addon-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      border: 1px solid var(--gray-200);
+      text-align: center;
+      transition: all var(--transition);
+    }
+    .addon-card:hover {
+      border-color: var(--blue);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-sm);
+    }
+    .addon-icon { width: 52px; height: 52px; margin: 0 auto 0.75rem; display: block; }
+    .addon-name {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 0.4rem;
+    }
+    .addon-desc {
+      font-size: 0.78rem;
+      color: var(--gray-400);
+      margin-bottom: 0.75rem;
+      line-height: 1.5;
+    }
+    .addon-price {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--blue);
+    }
+
+    /* CTA BANNER */
+    .cta-banner {
+      background: var(--blue);
+      padding: 6rem 5%;
+    }
+    .cta-banner-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 3rem;
+    }
+    .cta-banner-title {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 400;
+      color: var(--white);
+      margin-bottom: 0.75rem;
+      line-height: 1.15;
+    }
+    .cta-banner-sub {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.7);
+      max-width: 480px;
+      line-height: 1.7;
+    }
+    .btn-white {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--white);
+      color: var(--blue);
+      padding: 0.9rem 2.25rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: transform var(--transition), box-shadow var(--transition);
+      flex-shrink: 0;
+    }
+    .btn-white:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--charcoal);
+      padding: 3rem 5%;
+      color: rgba(255,255,255,0.7);
+    }
+    .footer-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .footer-logo {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: white;
+      text-decoration: none;
+    }
+    .footer-logo span { color: var(--blue); }
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+    .footer-links a:hover { color: white; }
+    .footer-copy {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.3);
+    }
+
+    /* ANIMATIONS */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .stagger-1 { transition-delay: 0.1s; }
+    .stagger-2 { transition-delay: 0.2s; }
+    .stagger-3 { transition-delay: 0.3s; }
+    .stagger-4 { transition-delay: 0.4s; }
+
+    /* MOBILE */
+    @media (max-width: 1024px) {
+      .drips-grid { grid-template-columns: 1fr; }
+      .drip-card-featured { grid-template-columns: 1fr; }
+      .featured-visual { display: none; }
+      .addons-grid { grid-template-columns: repeat(2, 1fr); }
+      .cta-banner-inner { flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 768px) {
+      section { padding: 4rem 5%; }
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 72px; left: 0; right: 0;
+        background: var(--off-white);
+        padding: 2rem 5%;
+        border-top: 1px solid var(--gray-200);
+        box-shadow: var(--shadow-md);
+        gap: 1.25rem;
+      }
+      .page-hero-stats { flex-direction: column; gap: 1.5rem; }
+      .comparison-table { font-size: 0.8rem; }
+      .comparison-table th, .comparison-table td { padding: 0.85rem 1rem; }
+      .addons-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">VIVA<span>.</span>drip</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="services.html" class="active">Services</a></li>
+    <li><a href="index.html#why-us">About</a></li>
+    <li><a href="index.html#faq">FAQ</a></li>
+    <li><a href="booking.html" class="nav-cta">Book a Session</a></li>
+  </ul>
+  <div class="nav-hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-hero-label">Our IV Drip Menu</div>
+    <h1 class="page-hero-title">
+      Formulas for <em>every</em><br>
+      aspect of wellness
+    </h1>
+    <p class="page-hero-sub">
+      Ten precisely crafted IV infusions, each targeting a specific health goal. Developed by our medical director and administered by registered nurses.
+    </p>
+    <div class="page-hero-stats">
+      <div>
+        <div class="page-hero-stat-num">10</div>
+        <div class="page-hero-stat-label">Signature Drips</div>
+      </div>
+      <div>
+        <div class="page-hero-stat-num">Pharmacy-Grade</div>
+        <div class="page-hero-stat-label">All Ingredients</div>
+      </div>
+      <div>
+        <div class="page-hero-stat-num">100%</div>
+        <div class="page-hero-stat-label">Bioavailability</div>
+      </div>
+      <div>
+        <div class="page-hero-stat-num">RN-Led</div>
+        <div class="page-hero-stat-label">Every Session</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <div class="filter-bar-inner">
+    <button class="filter-btn active" onclick="filterCategory('all', this)">All Drips</button>
+    <button class="filter-btn" onclick="filterCategory('wellness', this)">Wellness</button>
+    <button class="filter-btn" onclick="filterCategory('energy', this)">Energy</button>
+    <button class="filter-btn" onclick="filterCategory('beauty', this)">Beauty</button>
+    <button class="filter-btn" onclick="filterCategory('recovery', this)">Recovery</button>
+    <button class="filter-btn" onclick="filterCategory('immunity', this)">Immunity</button>
+    <button class="filter-btn" onclick="filterCategory('performance', this)">Performance</button>
+    <button class="filter-btn" onclick="filterCategory('longevity', this)">Longevity</button>
+  </div>
+</div>
+
+<!-- DRIPS -->
+<section class="drips-section">
+  <div class="section-inner">
+
+    <!-- WELLNESS -->
+    <div class="category-block" data-category="wellness">
+      <div class="category-header">
+        <div class="category-icon"><img src="images/stars_blue.svg" alt="" /></div>
+        <div class="category-name">General Wellness</div>
+        <div class="category-count">2 drips</div>
+      </div>
+
+      <!-- MYERS FEATURED -->
+      <div class="drip-card drip-card-featured fade-up" id="myers">
+        <div class="featured-left">
+          <div class="drip-card-top">
+            <div>
+              <div class="drip-card-badge">⭐ Best Seller · Most Popular</div>
+              <div class="drip-card-name">Myers' Cocktail</div>
+              <div class="drip-card-tagline">The original IV vitamin infusion</div>
+            </div>
+          </div>
+          <div class="drip-card-body">
+            <p class="drip-card-desc">Developed by Dr. John Myers in the 1970s and refined over decades of clinical use, the Myers' Cocktail is the most well-researched IV therapy available. It addresses fatigue, migraines, fibromyalgia, acute asthma attacks, and general wellness with a comprehensive blend of essential vitamins and minerals.</p>
+            <div class="drip-card-ingredients">
+              <span class="ingredient-tag">Magnesium</span>
+              <span class="ingredient-tag">Calcium</span>
+              <span class="ingredient-tag">Vitamin B12</span>
+              <span class="ingredient-tag">B-Complex</span>
+              <span class="ingredient-tag">Vitamin C</span>
+              <span class="ingredient-tag">Normal Saline</span>
+            </div>
+          </div>
+          <div class="drip-card-footer">
+            <div class="drip-meta">
+              <div class="drip-meta-item">
+                <span class="drip-meta-label">Duration</span>
+                <span class="drip-meta-value">30–45 min</span>
+              </div>
+              <div class="drip-meta-item">
+                <span class="drip-meta-label">Volume</span>
+                <span class="drip-meta-value">500 mL</span>
+              </div>
+            </div>
+            <div class="drip-price">$175 <span>/ session</span></div>
+            <a href="booking.html" class="btn-primary">Book Now &rarr;</a>
+          </div>
+        </div>
+        <div class="featured-visual">
+          <div class="featured-badge">Best Seller</div>
+          <img class="featured-visual-img" src="images/drip_bag.png" alt="IV Drip Bag" />
+        </div>
+      </div>
+
+      <div class="drips-grid">
+        <div class="drip-card fade-up stagger-1" id="hydration">
+          <div class="drip-card-top">
+            <div class="drip-card-icon"><img src="images/drop_blue.svg" alt="" /></div>
+            <div>
+              <div class="drip-card-badge">Hydration</div>
+              <div class="drip-card-name">Pure Hydration</div>
+              <div class="drip-card-tagline">Replenish, rehydrate, restore</div>
+            </div>
+          </div>
+          <div class="drip-card-body">
+            <p class="drip-card-desc">When drinking water just isn't enough. A full litre of normal saline with electrolytes and optional anti-nausea medication. Perfect for illness recovery, heat exhaustion, or general dehydration.</p>
+            <div class="drip-card-ingredients">
+              <span class="ingredient-tag">1L Normal Saline</span>
+              <span class="ingredient-tag">Electrolytes</span>
+              <span class="ingredient-tag">Vitamin B12</span>
+            </div>
+          </div>
+          <div class="drip-card-footer">
+            <div class="drip-meta">
+              <div class="drip-meta-item">
+                <span class="drip-meta-label">Duration</span>
+                <span class="drip-meta-value">30–40 min</span>
+              </div>
+              <div class="drip-meta-item">
+                <span class="drip-meta-label">Volume</span>
+                <span class="drip-meta-value">1000 mL</span>
+              </div>
+            </div>
+            <div class="drip-price">$130 <span>/ session</span></div>
+            <a href="booking.html" class="btn-primary">Book &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ENERGY -->
+    <div class="category-block" data-category="energy">
+      <div class="category-header">
+        <div class="category-icon"><img src="images/lightning_blue.svg" alt="" /></div>
+        <div class="category-name">Energy & Focus</div>
+        <div class="category-count">2 drips</div>
+      </div>
+      <div class="drips-grid">
+        <div class="drip-card fade-up stagger-1" id="energy">
+          <div class="drip-card-top">
+            <div class="drip-card-icon"><img src="images/lightning_blue.svg" alt="" /></div>
+            <div>
+              <div class="drip-card-badge">Energy</div>
+              <div class="drip-card-name">Power &amp; Energy</div>
+              <div class="drip-card-tagline">Fuel your mitochondria</div>
+            </div>
+          </div>
+          <div class="drip-card-body">
+            <p class="drip-card-desc">Combat chronic fatigue, brain fog, and low motivation at the cellular level. This high-potency blend targets your energy production pathways directly, with results felt within hours of your infusion.</p>
+            <div class="drip-card-ingredients">
+              <span class="ingredient-tag">B-Complex</span>
+              <span class="ingredient-tag">Vitamin B12</span>
+              <span class="ingredient-tag">CoQ10</span>
+              <span class="ingredient-tag">Amino Acids</span>
+              <span class="ingredient-tag">Magnesium</span>
+            </div>
+          </div>
+          <div class="drip-card-footer">
+            <div class="drip-meta">
+              <div class="drip-meta-item">
+                <span class="drip-meta-label">Duration</span>
+                <span class="drip-meta-value">45–60 min</span>
+              </div>
+              <div class="drip-meta-item">
+                <span class="drip-meta-label">Volume</span>
+                <span class="drip-meta-value">500 mL</span>
+              </div>
+            </div>
+            <div class="drip-price">$195 <span>/ session</span></div>
+            <a href="booking.html" class="btn-primary">Book &rarr;</a>
+          </div>
+        </div>
+        <div class="drip-card fade-up stagger-2" id="brain">
+          <div class="drip-card-top">
+            <div class="drip-card-icon"><img src="images/brain_blue.svg" alt="" /></div>
+            <div>
+              <div class="drip-card-badge">Cognitive</div>
+              <div class="drip-card-name">Brain Boost</div>
+              <div class="drip-card-tagline">Clarity, focus, mental sharpness</div>
+            </div>
+          </div>
+          <div class="drip-card-body">
+            <p class="drip-card-desc">Designed for high performers, executives, and anyone who needs to operate at their cognitive peak. A precision blend that supports neurotransmitter production, neuroplasticity, and sustained mental energy.</p>
+            <div class="drip-card-ingredients">
+              <span class="ingredient-tag">Alpha-Lipoic Acid</span>
+              <span class="ingredient-tag">B-Complex</span>
+              <span class="ingredient-tag">L-Carnitine</span>
+              <span class="ingredient-tag">Taurine</span>
+              <span class="ingredient-tag">Vitamin C</span>
+            </div>
+          </div>
+          <div class="drip-card-footer">
+            <div class="drip-meta">
+              <div class="drip-meta-item">
+                <span class="drip-meta-label">Duration</span>
+                <span class="drip-meta-value">45–60 min</span>
+              </div>
+              <div class="drip-meta-item">
+                <span class="drip-meta-label">Volume</span>
+                <span class="drip-meta-value">500 mL</span>
+              </div>
+            </div>
+            <div class="drip-price">$210 <span>/ session</span></div>
+            <a href="booking.html" class="btn-primary">Book &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BEAUTY -->
+    <div class="category-block" data-category="beauty">
+      <div class="category-header">
+        <div class="category-icon"><img src="images/diamond_blue.svg" alt="" /></div>
+        <div class="category-name">Beauty &amp; Skin</div>
+        <div class="category-count">2 drips</div>
+      </div>
+      <div class="drips-grid">
+        <div class="drip-card fade-up stagger-1" id="glow">
+          <div class="drip-card-top">
+            <div class="drip-card-icon"><img src="images/diamond_blue.svg" alt="" /></div>
+            <div>
+              <div class="drip-card-badge">Beauty · Client Favourite</div>
+              <div class="drip-card-name">Radiance &amp; Glow</div>
+              <div class="drip-card-tagline">Beauty from within</div>
+            </div>
+          </div>
+          <div class="drip-card-body">
+            <p class="drip-card-desc">Glutathione — the body's master antioxidant — combined with Vitamin C and Biotin to brighten skin tone, reduce hyperpigmentation, and support collagen synthesis. A visible difference in skin luminosity and texture, from the inside out.</p>
+            <div class="drip-card-ingredients">
+              <span class="ingredient-tag">Glutathione</span>
+              <span class="ingredient-tag">Vitamin C</span>
+              <span class="ingredient-tag">Biotin</span>
+              <span class="ingredient-tag">B-Complex</span>
+              <span class="ingredient-tag">Zinc</span>
+            </div>
+          </div>
+          <div class="drip-card-footer">
+            <div class="drip-meta">
+              <div class="drip-meta-item">
+                <span class="drip-meta-label">Duration</span>
+                <span class="drip-meta-value">45–60 min</span>
+              </div>
+              <div class="drip-meta-item">
+                <span class="drip-meta-label">Volume</span>
+                <span class="drip-meta-value">500 mL</span>
+              </div>
+            </div>
+            <div class="drip-price">$220 <span>/ session</span></div>
+            <a href="booking.html" class="btn-primary">Book &rarr;</a>
+          </div>
+        </div>
+        <div class="drip-card fade-up stagger-2" id="hair">
+          <div class="drip-card-top">
+            <div class="drip-card-icon"><img src="images/flower_blue.svg" alt="" /></div>
+            <div>
+              <div class="drip-card-badge">Beauty</div>
+              <div class="drip-card-name">Hair, Skin &amp; Nails</div>
+              <div class="drip-card-tagline">Strengthen from root to tip</div>
+            </div>
+          </div>
+          <div class="drip-card-body">
+            <p class="drip-card-desc">A targeted formula to combat hair thinning, brittle nails, and dull skin. Loaded with high-dose Biotin, Silica, and essential amino acids to support keratin production and cellular regeneration.</p>
+            <div class="drip-card-ingredients">
+              <span class="ingredient-tag">High-Dose Biotin</span>
+              <span class="ingredient-tag">Silica</span>
+              <span class="ingredient-tag">Amino Acids</span>
+              <span class="ingredient-tag">Vitamin B7</span>
+              <span class="ingredient-tag">Zinc</span>
+            </div>
+          </div>
+          <div class="drip-card-footer">
+            <div class="drip-meta">
+              <div class="drip-meta-item">
+                <span class="drip-meta-label">Duration</span>
+                <span class="drip-meta-value">45 min</span>
+              </div>
+              <div class="drip-meta-item">
+                <span class="drip-meta-label">Volume</span>
+                <span class="drip-meta-value">500 mL</span>
+              </div>
+            </div>
+            <div class="drip-price">$200 <span>/ session</span></div>
+            <a href="booking.html" class="btn-primary">Book &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RECOVERY -->
+    <div class="category-block" data-category="recovery">
+      <div class="category-header">
+        <div class="category-icon"><img src="images/recycle_blue.svg" alt="" /></div>
+        <div class="category-name">Recovery</div>
+        <div class="category-count">1 drip</div>
+      </div>
+      <div class="drips-grid">
+        <div class="drip-card fade-up stagger-1" id="recovery">
+          <div class="drip-card-top">
+            <div class="drip-card-icon"><img src="images/recycle_blue.svg" alt="" /></div>
+            <div>
+              <div class="drip-card-badge">Recovery · Hangover</div>
+              <div class="drip-card-name">Rapid Recovery</div>
+              <div class="drip-card-tagline">Bounce back, fast</div>
+            </div>
+          </div>
+          <div class="drip-card-body">
+            <p class="drip-card-desc">Whether you're recovering from a big night, an illness, intense training, or prolonged travel — this drip was built to get you back on your feet. Anti-nausea and anti-inflammatory medications combined with deep rehydration give rapid, noticeable relief.</p>
+            <div class="drip-card-ingredients">
+              <span class="ingredient-tag">1L Normal Saline</span>
+              <span class="ingredient-tag">Ondansetron</span>
+              <span class="ingredient-tag">Toradol</span>
+              <span class="ingredient-tag">B-Complex</span>
+              <span class="ingredient-tag">Electrolytes</span>
+            </div>
+          </div>
+          <div class="drip-card-footer">
+            <div class="drip-meta">
+              <div class="drip-meta-item">
+                <span class="drip-meta-label">Duration</span>
+                <span class="drip-meta-value">45–60 min</span>
+              </div>
+              <div class="drip-meta-item">
+                <span class="drip-meta-label">Volume</span>
+                <span class="drip-meta-value">1000 mL</span>
+              </div>
+            </div>
+            <div class="drip-price">$165 <span>/ session</span></div>
+            <a href="booking.html" class="btn-primary">Book &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- IMMUNITY -->
+    <div class="category-block" data-category="immunity">
+      <div class="category-header">
+        <div class="category-icon"><img src="images/shield_blue.svg" alt="" /></div>
+        <div class="category-name">Immunity</div>
+        <div class="category-count">1 drip</div>
+      </div>
+      <div class="drips-grid">
+        <div class="drip-card fade-up stagger-1" id="immunity">
+          <div class="drip-card-top">
+            <div class="drip-card-icon"><img src="images/shield_blue.svg" alt="" /></div>
+            <div>
+              <div class="drip-card-badge">Immunity · Seasonal</div>
+              <div class="drip-card-name">Immunity Shield</div>
+              <div class="drip-card-tagline">Fortify your body's defences</div>
+            </div>
+          </div>
+          <div class="drip-card-body">
+            <p class="drip-card-desc">High-dose intravenous Vitamin C delivers 50x more to your immune cells than any oral supplement. Combined with Zinc, B vitamins, and powerful antioxidants — your immune system gets the fuel it needs to fight back hard and fast.</p>
+            <div class="drip-card-ingredients">
+              <span class="ingredient-tag">High-Dose Vit C</span>
+              <span class="ingredient-tag">Zinc</span>
+              <span class="ingredient-tag">B-Complex</span>
+              <span class="ingredient-tag">Selenium</span>
+              <span class="ingredient-tag">Glutathione</span>
+            </div>
+          </div>
+          <div class="drip-card-footer">
+            <div class="drip-meta">
+              <div class="drip-meta-item">
+                <span class="drip-meta-label">Duration</span>
+                <span class="drip-meta-value">45–60 min</span>
+              </div>
+              <div class="drip-meta-item">
+                <span class="drip-meta-label">Volume</span>
+                <span class="drip-meta-value">500 mL</span>
+              </div>
+            </div>
+            <div class="drip-price">$185 <span>/ session</span></div>
+            <a href="booking.html" class="btn-primary">Book &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PERFORMANCE -->
+    <div class="category-block" data-category="performance">
+      <div class="category-header">
+        <div class="category-icon"><img src="images/trophy_blue.svg" alt="" /></div>
+        <div class="category-name">Athletic Performance</div>
+        <div class="category-count">1 drip</div>
+      </div>
+      <div class="drips-grid">
+        <div class="drip-card fade-up stagger-1" id="performance">
+          <div class="drip-card-top">
+            <div class="drip-card-icon"><img src="images/trophy_blue.svg" alt="" /></div>
+            <div>
+              <div class="drip-card-badge">Performance · Athletes</div>
+              <div class="drip-card-name">Athletic Peak</div>
+              <div class="drip-card-tagline">Train harder, recover faster</div>
+            </div>
+          </div>
+          <div class="drip-card-body">
+            <p class="drip-card-desc">Trusted by professional athletes and serious fitness enthusiasts. Replenishes minerals lost during intense exercise, reduces muscle inflammation, and speeds recovery — so you're ready for your next session sooner.</p>
+            <div class="drip-card-ingredients">
+              <span class="ingredient-tag">Amino Acids</span>
+              <span class="ingredient-tag">Magnesium</span>
+              <span class="ingredient-tag">Electrolytes</span>
+              <span class="ingredient-tag">B-Complex</span>
+              <span class="ingredient-tag">L-Carnitine</span>
+              <span class="ingredient-tag">Vitamin C</span>
+            </div>
+          </div>
+          <div class="drip-card-footer">
+            <div class="drip-meta">
+              <div class="drip-meta-item">
+                <span class="drip-meta-label">Duration</span>
+                <span class="drip-meta-value">45–60 min</span>
+              </div>
+              <div class="drip-meta-item">
+                <span class="drip-meta-label">Volume</span>
+                <span class="drip-meta-value">500 mL</span>
+              </div>
+            </div>
+            <div class="drip-price">$205 <span>/ session</span></div>
+            <a href="booking.html" class="btn-primary">Book &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LONGEVITY -->
+    <div class="category-block" data-category="longevity">
+      <div class="category-header">
+        <div class="category-icon"><img src="images/dna_blue.svg" alt="" /></div>
+        <div class="category-name">Longevity &amp; Anti-Aging</div>
+        <div class="category-count">1 drip</div>
+      </div>
+      <div class="drips-grid">
+        <div class="drip-card fade-up stagger-1" id="nad">
+          <div class="drip-card-top">
+            <div class="drip-card-icon"><img src="images/dna_blue.svg" alt="" /></div>
+            <div>
+              <div class="drip-card-badge">Longevity · Advanced</div>
+              <div class="drip-card-name">NAD+ Longevity</div>
+              <div class="drip-card-tagline">The gold standard of anti-aging infusions</div>
+            </div>
+          </div>
+          <div class="drip-card-body">
+            <p class="drip-card-desc">NAD+ (Nicotinamide Adenine Dinucleotide) is a coenzyme present in every cell of your body, and its levels decline with age. IV replenishment supports DNA repair, mitochondrial function, cognitive clarity, metabolism, and healthy aging at the deepest cellular level. Our most transformative offering.</p>
+            <div class="drip-card-ingredients">
+              <span class="ingredient-tag">NAD+ (250mg–500mg)</span>
+              <span class="ingredient-tag">B-Complex</span>
+              <span class="ingredient-tag">Magnesium</span>
+              <span class="ingredient-tag">Amino Acids</span>
+            </div>
+          </div>
+          <div class="drip-card-footer">
+            <div class="drip-meta">
+              <div class="drip-meta-item">
+                <span class="drip-meta-label">Duration</span>
+                <span class="drip-meta-value">2–4 hours</span>
+              </div>
+              <div class="drip-meta-item">
+                <span class="drip-meta-label">Volume</span>
+                <span class="drip-meta-value">500 mL</span>
+              </div>
+            </div>
+            <div class="drip-price">$350 <span>/ session</span></div>
+            <a href="booking.html" class="btn-primary">Book &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- COMPARISON TABLE -->
+<section class="comparison">
+  <div class="section-inner">
+    <div class="section-label">Quick Comparison</div>
+    <h2 class="section-title" style="margin-bottom:2.5rem">Find your <em>perfect drip</em></h2>
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Drip</th>
+          <th>Energy</th>
+          <th>Immunity</th>
+          <th>Beauty</th>
+          <th>Recovery</th>
+          <th>Duration</th>
+          <th>Price</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name-cell">Myers' Cocktail</td>
+          <td><span class="check">✓</span></td>
+          <td><span class="check">✓</span></td>
+          <td><span class="check">✓</span></td>
+          <td><span class="check">✓</span></td>
+          <td>30–45 min</td>
+          <td class="price-cell">$175</td>
+          <td class="book-cell"><a href="booking.html">Book</a></td>
+        </tr>
+        <tr>
+          <td class="name-cell">Pure Hydration</td>
+          <td><span class="dash">—</span></td>
+          <td><span class="dash">—</span></td>
+          <td><span class="dash">—</span></td>
+          <td><span class="check">✓</span></td>
+          <td>30–40 min</td>
+          <td class="price-cell">$130</td>
+          <td class="book-cell"><a href="booking.html">Book</a></td>
+        </tr>
+        <tr>
+          <td class="name-cell">Power & Energy</td>
+          <td><span class="check">✓</span></td>
+          <td><span class="dash">—</span></td>
+          <td><span class="dash">—</span></td>
+          <td><span class="dash">—</span></td>
+          <td>45–60 min</td>
+          <td class="price-cell">$195</td>
+          <td class="book-cell"><a href="booking.html">Book</a></td>
+        </tr>
+        <tr>
+          <td class="name-cell">Brain Boost</td>
+          <td><span class="check">✓</span></td>
+          <td><span class="dash">—</span></td>
+          <td><span class="dash">—</span></td>
+          <td><span class="dash">—</span></td>
+          <td>45–60 min</td>
+          <td class="price-cell">$210</td>
+          <td class="book-cell"><a href="booking.html">Book</a></td>
+        </tr>
+        <tr>
+          <td class="name-cell">Radiance & Glow</td>
+          <td><span class="dash">—</span></td>
+          <td><span class="dash">—</span></td>
+          <td><span class="check">✓</span></td>
+          <td><span class="dash">—</span></td>
+          <td>45–60 min</td>
+          <td class="price-cell">$220</td>
+          <td class="book-cell"><a href="booking.html">Book</a></td>
+        </tr>
+        <tr>
+          <td class="name-cell">Hair, Skin & Nails</td>
+          <td><span class="dash">—</span></td>
+          <td><span class="dash">—</span></td>
+          <td><span class="check">✓</span></td>
+          <td><span class="dash">—</span></td>
+          <td>45 min</td>
+          <td class="price-cell">$200</td>
+          <td class="book-cell"><a href="booking.html">Book</a></td>
+        </tr>
+        <tr>
+          <td class="name-cell">Rapid Recovery</td>
+          <td><span class="dash">—</span></td>
+          <td><span class="dash">—</span></td>
+          <td><span class="dash">—</span></td>
+          <td><span class="check">✓</span></td>
+          <td>45–60 min</td>
+          <td class="price-cell">$165</td>
+          <td class="book-cell"><a href="booking.html">Book</a></td>
+        </tr>
+        <tr>
+          <td class="name-cell">Immunity Shield</td>
+          <td><span class="dash">—</span></td>
+          <td><span class="check">✓</span></td>
+          <td><span class="dash">—</span></td>
+          <td><span class="dash">—</span></td>
+          <td>45–60 min</td>
+          <td class="price-cell">$185</td>
+          <td class="book-cell"><a href="booking.html">Book</a></td>
+        </tr>
+        <tr>
+          <td class="name-cell">Athletic Peak</td>
+          <td><span class="check">✓</span></td>
+          <td><span class="dash">—</span></td>
+          <td><span class="dash">—</span></td>
+          <td><span class="check">✓</span></td>
+          <td>45–60 min</td>
+          <td class="price-cell">$205</td>
+          <td class="book-cell"><a href="booking.html">Book</a></td>
+        </tr>
+        <tr>
+          <td class="name-cell">NAD+ Longevity</td>
+          <td><span class="check">✓</span></td>
+          <td><span class="dash">—</span></td>
+          <td><span class="dash">—</span></td>
+          <td><span class="dash">—</span></td>
+          <td>2–4 hours</td>
+          <td class="price-cell">$350</td>
+          <td class="book-cell"><a href="booking.html">Book</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ADD-ONS -->
+<section class="addons">
+  <div class="section-inner">
+    <div class="section-label">Enhance Your Session</div>
+    <h2 class="section-title" style="margin-bottom:0.75rem">Booster <em>Add-ons</em></h2>
+    <p class="section-sub" style="margin-bottom:3rem">Customise any drip with targeted boosters for an additional charge. Ask your nurse at the time of booking.</p>
+    <div class="addons-grid">
+      <div class="addon-card fade-up stagger-1">
+        <img class="addon-icon" src="images/pill_blue.svg" alt="" />
+        <div class="addon-name">Glutathione Push</div>
+        <div class="addon-desc">Powerful antioxidant IV push for detox and brightening</div>
+        <div class="addon-price">+$45</div>
+      </div>
+      <div class="addon-card fade-up stagger-2">
+        <img class="addon-icon" src="images/fire_blue.svg" alt="" />
+        <div class="addon-name">Vitamin D3</div>
+        <div class="addon-desc">Combat deficiency and support bone, immune, and mood health</div>
+        <div class="addon-price">+$35</div>
+      </div>
+      <div class="addon-card fade-up stagger-3">
+        <img class="addon-icon" src="images/injection.svg" alt="" />
+        <div class="addon-name">Extra B12 Shot</div>
+        <div class="addon-desc">IM injection for rapid energy and neurological support</div>
+        <div class="addon-price">+$25</div>
+      </div>
+      <div class="addon-card fade-up stagger-4">
+        <img class="addon-icon" src="images/meditate_blue.svg" alt="" />
+        <div class="addon-name">Magnesium Boost</div>
+        <div class="addon-desc">Higher-dose magnesium for muscle relaxation and sleep</div>
+        <div class="addon-price">+$30</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-banner">
+  <div class="cta-banner-inner">
+    <div>
+      <h2 class="cta-banner-title">Not sure which drip is right for you?</h2>
+      <p class="cta-banner-sub">Our team is here to help. Book a complimentary consultation and we'll guide you to the perfect formula for your goals.</p>
+    </div>
+    <a href="booking.html" class="btn-white">Book Your Session &rarr;</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <a href="index.html" class="footer-logo">VIVA<span>.</span>drip</a>
+    <ul class="footer-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="booking.html">Book</a></li>
+      <li><a href="index.html#faq">FAQ</a></li>
+    </ul>
+    <span class="footer-copy">© 2026 VIVA Drip. All rights reserved.</span>
+  </div>
+</footer>
+
+<script>
+  // Hamburger
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Filter
+  function filterCategory(cat, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.category-block').forEach(block => {
+      if (cat === 'all' || block.dataset.category === cat) {
+        block.style.display = '';
+      } else {
+        block.style.display = 'none';
+      }
+    });
+  }
+</script>
+</body>
+</html>

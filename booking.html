@@ -1,0 +1,1536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book a Session — VIVA Drip</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white: #FFFFFF;
+      --off-white: #F8F8F6;
+      --black: #0A0A0A;
+      --charcoal: #1A1A1A;
+      --gray-100: #F3F3F1;
+      --gray-200: #E8E8E5;
+      --gray-300: #D0D0CC;
+      --gray-400: #9A9A96;
+      --gray-600: #5A5A56;
+      --blue: #2563EB;
+      --blue-dark: #1D4ED8;
+      --blue-light: #EFF6FF;
+      --blue-mid: #DBEAFE;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'Inter', system-ui, sans-serif;
+      --radius: 12px;
+      --radius-lg: 20px;
+      --shadow-sm: 0 2px 12px rgba(0,0,0,0.06);
+      --shadow-md: 0 8px 32px rgba(0,0,0,0.10);
+      --shadow-lg: 0 20px 60px rgba(0,0,0,0.14);
+      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background-color: var(--off-white);
+      color: var(--black);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 0 5%;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(248,248,246,0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--gray-200);
+      box-shadow: var(--shadow-sm);
+    }
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.6rem;
+      font-weight: 500;
+      color: var(--black);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+    }
+    .nav-logo span { color: var(--blue); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--gray-600);
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      transition: color var(--transition);
+    }
+    .nav-links a:hover { color: var(--black); }
+    .nav-links a.active { color: var(--blue); }
+    .nav-cta {
+      background: var(--blue);
+      color: var(--white) !important;
+      padding: 0.55rem 1.4rem;
+      border-radius: 50px;
+      font-size: 0.85rem !important;
+      font-weight: 600 !important;
+      transition: background var(--transition), transform var(--transition) !important;
+    }
+    .nav-cta:hover { background: var(--blue-dark) !important; }
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--black);
+      border-radius: 2px;
+    }
+
+    /* PAGE HERO */
+    .page-hero {
+      padding-top: 72px;
+      background: var(--off-white);
+      padding-bottom: 0;
+    }
+    .page-hero-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 4rem 5% 0;
+      text-align: center;
+    }
+    .page-hero-label {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--blue);
+      background: var(--blue-light);
+      padding: 0.4rem 1rem;
+      border-radius: 50px;
+      margin-bottom: 1.5rem;
+    }
+    .page-hero-title {
+      font-family: var(--serif);
+      font-size: clamp(2.5rem, 4.5vw, 4.5rem);
+      font-weight: 400;
+      line-height: 1.1;
+      margin-bottom: 1.25rem;
+    }
+    .page-hero-title em { font-style: italic; color: var(--blue); }
+    .page-hero-sub {
+      font-size: 1rem;
+      color: var(--gray-600);
+      max-width: 520px;
+      margin: 0 auto 3rem;
+      line-height: 1.75;
+    }
+
+    /* BOOKING LAYOUT */
+    .booking-section {
+      padding: 4rem 5% 7rem;
+    }
+    .booking-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    /* FORM */
+    .booking-form-wrap {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 3rem;
+      box-shadow: var(--shadow-md);
+    }
+
+    /* STEPS */
+    .form-steps {
+      display: flex;
+      gap: 0;
+      margin-bottom: 3rem;
+      border-bottom: 1px solid var(--gray-200);
+      padding-bottom: 0;
+    }
+    .form-step {
+      flex: 1;
+      padding-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      cursor: pointer;
+      position: relative;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      transition: border-color var(--transition);
+    }
+    .form-step.active { border-bottom-color: var(--blue); }
+    .form-step-num {
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      background: var(--gray-100);
+      border: 1.5px solid var(--gray-200);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--gray-400);
+      flex-shrink: 0;
+      transition: all var(--transition);
+    }
+    .form-step.active .form-step-num {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: var(--white);
+    }
+    .form-step.completed .form-step-num {
+      background: #22c55e;
+      border-color: #22c55e;
+      color: var(--white);
+    }
+    .form-step-label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--gray-400);
+      transition: color var(--transition);
+    }
+    .form-step.active .form-step-label { color: var(--blue); }
+    .form-step.completed .form-step-label { color: #22c55e; }
+
+    /* FORM PANELS */
+    .form-panel { display: none; }
+    .form-panel.active { display: block; }
+
+    .form-panel-title {
+      font-family: var(--serif);
+      font-size: 1.6rem;
+      font-weight: 500;
+      color: var(--black);
+      margin-bottom: 0.4rem;
+    }
+    .form-panel-sub {
+      font-size: 0.875rem;
+      color: var(--gray-600);
+      margin-bottom: 2rem;
+    }
+
+    /* DRIP SELECTOR */
+    .drip-selector {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+    .drip-option {
+      border: 1.5px solid var(--gray-200);
+      border-radius: var(--radius);
+      padding: 1rem 1.25rem;
+      cursor: pointer;
+      transition: all var(--transition);
+      position: relative;
+    }
+    .drip-option:hover {
+      border-color: var(--blue);
+      background: var(--blue-light);
+    }
+    .drip-option.selected {
+      border-color: var(--blue);
+      background: var(--blue-light);
+    }
+    .drip-option input {
+      position: absolute;
+      opacity: 0;
+      width: 0; height: 0;
+    }
+    .drip-option-icon { font-size: 1.2rem; margin-bottom: 0.4rem; }
+    .drip-option-name {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 0.2rem;
+    }
+    .drip-option-price {
+      font-size: 0.75rem;
+      color: var(--blue);
+      font-weight: 600;
+    }
+    .drip-option-check {
+      position: absolute;
+      top: 0.75rem; right: 0.75rem;
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      background: var(--blue);
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+    .drip-option-check svg { color: white; }
+    .drip-option.selected .drip-option-check { display: flex; }
+
+    /* LOCATION TABS */
+    .location-tabs {
+      display: flex;
+      gap: 0;
+      background: var(--gray-100);
+      border-radius: 50px;
+      padding: 4px;
+      margin-bottom: 1.5rem;
+      width: fit-content;
+    }
+    .location-tab {
+      padding: 0.5rem 1.5rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--gray-600);
+      cursor: pointer;
+      transition: all var(--transition);
+      border: none;
+      background: transparent;
+    }
+    .location-tab.active {
+      background: var(--white);
+      color: var(--black);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* DATE/TIME */
+    .date-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .date-btn {
+      aspect-ratio: 1;
+      border-radius: var(--radius);
+      border: 1.5px solid var(--gray-200);
+      background: transparent;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all var(--transition);
+      gap: 2px;
+    }
+    .date-btn:hover:not(:disabled) {
+      border-color: var(--blue);
+      background: var(--blue-light);
+    }
+    .date-btn.selected {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: var(--white);
+    }
+    .date-btn:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+    .date-btn-day {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      opacity: 0.6;
+    }
+    .date-btn.selected .date-btn-day { opacity: 0.8; }
+    .date-btn-num {
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+    .time-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.5rem;
+    }
+    .time-btn {
+      padding: 0.65rem;
+      border-radius: var(--radius);
+      border: 1.5px solid var(--gray-200);
+      background: transparent;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--black);
+      cursor: pointer;
+      transition: all var(--transition);
+      text-align: center;
+    }
+    .time-btn:hover:not(:disabled) {
+      border-color: var(--blue);
+      background: var(--blue-light);
+      color: var(--blue);
+    }
+    .time-btn.selected {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: var(--white);
+    }
+    .time-btn:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+      text-decoration: line-through;
+    }
+
+    /* FORM FIELDS */
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+    }
+    .form-group:last-child { margin-bottom: 0; }
+    .form-group.full { grid-column: 1 / -1; }
+    label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--charcoal);
+      text-transform: uppercase;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="date"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border: 1.5px solid var(--gray-200);
+      border-radius: var(--radius);
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      color: var(--black);
+      background: var(--white);
+      transition: border-color var(--transition), box-shadow var(--transition);
+      outline: none;
+      appearance: none;
+    }
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.12);
+    }
+    textarea { resize: vertical; min-height: 90px; }
+    select {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 0.75rem center;
+      background-size: 1.25em;
+      padding-right: 2.5rem;
+    }
+
+    /* HEALTH CHECKBOXES */
+    .health-checks {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.6rem;
+      margin-top: 0.5rem;
+    }
+    .health-check {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.85rem;
+      color: var(--gray-600);
+      cursor: pointer;
+      padding: 0.5rem 0;
+    }
+    .health-check input[type="checkbox"] {
+      width: 18px; height: 18px;
+      border: 1.5px solid var(--gray-300);
+      border-radius: 4px;
+      accent-color: var(--blue);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    /* CONSENT */
+    .consent-box {
+      background: var(--gray-100);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+    .consent-title {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 0.5rem;
+    }
+    .consent-text {
+      font-size: 0.78rem;
+      color: var(--gray-600);
+      line-height: 1.65;
+      margin-bottom: 1rem;
+    }
+    .consent-label {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-size: 0.82rem;
+      color: var(--charcoal);
+      cursor: pointer;
+      line-height: 1.5;
+    }
+    .consent-label input {
+      width: 18px; height: 18px;
+      margin-top: 1px;
+      accent-color: var(--blue);
+      flex-shrink: 0;
+    }
+
+    /* NAV BUTTONS */
+    .form-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--gray-100);
+    }
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: transparent;
+      border: 1.5px solid var(--gray-200);
+      color: var(--gray-600);
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .btn-back:hover {
+      border-color: var(--black);
+      color: var(--black);
+    }
+    .btn-next {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--blue);
+      color: var(--white);
+      padding: 0.85rem 2rem;
+      border-radius: 50px;
+      font-size: 0.875rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+    }
+    .btn-next:hover {
+      background: var(--blue-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(37,99,235,0.35);
+    }
+    .btn-next svg { transition: transform var(--transition); }
+    .btn-next:hover svg { transform: translateX(3px); }
+
+    /* SUCCESS */
+    .success-screen {
+      display: none;
+      text-align: center;
+      padding: 3rem 2rem;
+    }
+    .success-screen.visible { display: block; }
+    .success-icon {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      margin: 0 auto 1.5rem;
+      box-shadow: 0 8px 24px rgba(34,197,94,0.3);
+    }
+    .success-title {
+      font-family: var(--serif);
+      font-size: 2.2rem;
+      font-weight: 500;
+      color: var(--black);
+      margin-bottom: 0.75rem;
+    }
+    .success-sub {
+      font-size: 0.95rem;
+      color: var(--gray-600);
+      line-height: 1.7;
+      margin-bottom: 2rem;
+      max-width: 360px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .success-details {
+      background: var(--blue-light);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      text-align: left;
+    }
+    .success-detail-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 0;
+      font-size: 0.875rem;
+      border-bottom: 1px solid rgba(37,99,235,0.1);
+    }
+    .success-detail-row:last-child { border-bottom: none; }
+    .success-detail-label { color: var(--gray-600); font-weight: 500; }
+    .success-detail-value { color: var(--black); font-weight: 700; }
+
+    /* SIDEBAR */
+    .booking-sidebar {
+      position: sticky;
+      top: 100px;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    /* SUMMARY CARD */
+    .summary-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--gray-200);
+    }
+    .summary-title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray-400);
+      margin-bottom: 1.5rem;
+    }
+    .summary-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--gray-100);
+    }
+    .summary-item:last-child { border-bottom: none; }
+    .summary-item-icon {
+      width: 36px; height: 36px;
+      border-radius: 9px;
+      background: var(--blue-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .summary-item-label {
+      font-size: 0.78rem;
+      color: var(--gray-400);
+      margin-bottom: 0.1rem;
+    }
+    .summary-item-value {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--black);
+    }
+    .summary-price-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 1.25rem;
+      margin-top: 0.5rem;
+      border-top: 1.5px solid var(--gray-200);
+    }
+    .summary-price-label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--gray-600);
+    }
+    .summary-price-amount {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--black);
+    }
+
+    /* TRUST CARD */
+    .trust-card {
+      background: var(--black);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      color: var(--white);
+    }
+    .trust-card-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 1.25rem;
+    }
+    .trust-items {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.7);
+    }
+    .trust-item-icon {
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    /* WHAT TO EXPECT */
+    .what-to-expect {
+      background: var(--white);
+      padding: 6rem 5%;
+    }
+    .what-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .expect-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    .expect-card {
+      background: var(--off-white);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      border: 1px solid var(--gray-200);
+    }
+    .expect-num {
+      font-family: var(--serif);
+      font-size: 3rem;
+      font-weight: 300;
+      color: var(--blue);
+      opacity: 0.35;
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+    .expect-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 0.5rem;
+    }
+    .expect-text {
+      font-size: 0.875rem;
+      color: var(--gray-600);
+      line-height: 1.7;
+    }
+
+    /* CANCELLATION */
+    .cancellation {
+      background: var(--off-white);
+      padding: 5rem 5%;
+    }
+    .cancellation-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .cancellation-title {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 400;
+      margin-bottom: 1rem;
+    }
+    .cancellation-text {
+      font-size: 0.9rem;
+      color: var(--gray-600);
+      line-height: 1.75;
+      margin-bottom: 2rem;
+    }
+    .policy-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      text-align: left;
+    }
+    .policy-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      border: 1px solid var(--gray-200);
+    }
+    .policy-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+    .policy-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 0.4rem;
+    }
+    .policy-text {
+      font-size: 0.8rem;
+      color: var(--gray-600);
+      line-height: 1.6;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--charcoal);
+      padding: 3rem 5%;
+      color: rgba(255,255,255,0.7);
+    }
+    .footer-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .footer-logo {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: white;
+      text-decoration: none;
+    }
+    .footer-logo span { color: var(--blue); }
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+    .footer-links a:hover { color: white; }
+    .footer-copy {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.3);
+    }
+
+    /* FADE */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .stagger-1 { transition-delay: 0.1s; }
+    .stagger-2 { transition-delay: 0.2s; }
+    .stagger-3 { transition-delay: 0.3s; }
+
+    /* MOBILE */
+    @media (max-width: 1024px) {
+      .booking-inner { grid-template-columns: 1fr; }
+      .booking-sidebar { position: static; }
+      .expect-grid { grid-template-columns: 1fr; }
+      .policy-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 72px; left: 0; right: 0;
+        background: var(--off-white);
+        padding: 2rem 5%;
+        border-top: 1px solid var(--gray-200);
+        box-shadow: var(--shadow-md);
+        gap: 1.25rem;
+      }
+      .drip-selector { grid-template-columns: 1fr; }
+      .date-grid { grid-template-columns: repeat(4, 1fr); }
+      .time-grid { grid-template-columns: repeat(3, 1fr); }
+      .form-row { grid-template-columns: 1fr; }
+      .health-checks { grid-template-columns: 1fr; }
+      .booking-form-wrap { padding: 2rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">VIVA<span>.</span>drip</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="index.html#why-us">About</a></li>
+    <li><a href="index.html#faq">FAQ</a></li>
+    <li><a href="booking.html" class="nav-cta active">Book a Session</a></li>
+  </ul>
+  <div class="nav-hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-hero-label">Online Booking</div>
+    <h1 class="page-hero-title">
+      Reserve your<br>
+      <em>VIVA Drip</em> session
+    </h1>
+    <p class="page-hero-sub">
+      Choose your drip, pick a time, and we'll take care of the rest. Quick, simple, and confirmed instantly.
+    </p>
+  </div>
+</div>
+
+<!-- BOOKING -->
+<div class="booking-section">
+  <div class="booking-inner">
+
+    <!-- FORM -->
+    <div class="booking-form-wrap">
+
+      <!-- Steps -->
+      <div class="form-steps">
+        <div class="form-step active" data-step="1">
+          <div class="form-step-num">1</div>
+          <div class="form-step-label">Drip & Location</div>
+        </div>
+        <div class="form-step" data-step="2">
+          <div class="form-step-num">2</div>
+          <div class="form-step-label">Date & Time</div>
+        </div>
+        <div class="form-step" data-step="3">
+          <div class="form-step-num">3</div>
+          <div class="form-step-label">Your Details</div>
+        </div>
+        <div class="form-step" data-step="4">
+          <div class="form-step-num">4</div>
+          <div class="form-step-label">Health & Confirm</div>
+        </div>
+      </div>
+
+      <!-- PANEL 1: Drip & Location -->
+      <div class="form-panel active" id="panel-1">
+        <div class="form-panel-title">Choose your drip</div>
+        <p class="form-panel-sub">Select the IV infusion that best matches your wellness goals.</p>
+
+        <div class="drip-selector">
+          <label class="drip-option selected" onclick="selectDrip(this, 'Myers\' Cocktail', 175)">
+            <input type="radio" name="drip" value="myers" checked />
+            <div class="drip-option-check">
+              <svg width="10" height="10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <div class="drip-option-icon">✨</div>
+            <div class="drip-option-name">Myers' Cocktail</div>
+            <div class="drip-option-price">$175</div>
+          </label>
+          <label class="drip-option" onclick="selectDrip(this, 'Immunity Shield', 185)">
+            <input type="radio" name="drip" value="immunity" />
+            <div class="drip-option-check">
+              <svg width="10" height="10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <div class="drip-option-icon">🛡️</div>
+            <div class="drip-option-name">Immunity Shield</div>
+            <div class="drip-option-price">$185</div>
+          </label>
+          <label class="drip-option" onclick="selectDrip(this, 'Radiance & Glow', 220)">
+            <input type="radio" name="drip" value="glow" />
+            <div class="drip-option-check">
+              <svg width="10" height="10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <div class="drip-option-icon">💎</div>
+            <div class="drip-option-name">Radiance & Glow</div>
+            <div class="drip-option-price">$220</div>
+          </label>
+          <label class="drip-option" onclick="selectDrip(this, 'Power & Energy', 195)">
+            <input type="radio" name="drip" value="energy" />
+            <div class="drip-option-check">
+              <svg width="10" height="10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <div class="drip-option-icon">⚡</div>
+            <div class="drip-option-name">Power & Energy</div>
+            <div class="drip-option-price">$195</div>
+          </label>
+          <label class="drip-option" onclick="selectDrip(this, 'Rapid Recovery', 165)">
+            <input type="radio" name="drip" value="recovery" />
+            <div class="drip-option-check">
+              <svg width="10" height="10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <div class="drip-option-icon">🔄</div>
+            <div class="drip-option-name">Rapid Recovery</div>
+            <div class="drip-option-price">$165</div>
+          </label>
+          <label class="drip-option" onclick="selectDrip(this, 'NAD+ Longevity', 350)">
+            <input type="radio" name="drip" value="nad" />
+            <div class="drip-option-check">
+              <svg width="10" height="10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <div class="drip-option-icon">🧬</div>
+            <div class="drip-option-name">NAD+ Longevity</div>
+            <div class="drip-option-price">$350</div>
+          </label>
+          <label class="drip-option" onclick="selectDrip(this, 'Brain Boost', 210)">
+            <input type="radio" name="drip" value="brain" />
+            <div class="drip-option-check">
+              <svg width="10" height="10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <div class="drip-option-icon">🧠</div>
+            <div class="drip-option-name">Brain Boost</div>
+            <div class="drip-option-price">$210</div>
+          </label>
+          <label class="drip-option" onclick="selectDrip(this, 'Athletic Peak', 205)">
+            <input type="radio" name="drip" value="athletic" />
+            <div class="drip-option-check">
+              <svg width="10" height="10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <div class="drip-option-icon">🏆</div>
+            <div class="drip-option-name">Athletic Peak</div>
+            <div class="drip-option-price">$205</div>
+          </label>
+        </div>
+
+        <div class="form-group" style="margin-bottom:1.5rem;">
+          <label>Session Type</label>
+          <div class="location-tabs">
+            <button class="location-tab active" onclick="setLocation(this, 'In-Lounge')">In-Lounge</button>
+            <button class="location-tab" onclick="setLocation(this, 'Mobile (At-Home)')">Mobile / At-Home</button>
+          </div>
+        </div>
+
+        <div class="form-nav">
+          <div></div>
+          <button class="btn-next" onclick="nextStep(1)">
+            Choose Date & Time
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- PANEL 2: Date & Time -->
+      <div class="form-panel" id="panel-2">
+        <div class="form-panel-title">Select a date</div>
+        <p class="form-panel-sub">Choose your preferred appointment date and time slot.</p>
+
+        <div style="margin-bottom:1.25rem;">
+          <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--gray-400);margin-bottom:0.75rem;">April 2026</div>
+          <div class="date-grid" id="dateGrid"></div>
+        </div>
+
+        <div>
+          <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--gray-400);margin-bottom:0.75rem;">Available Times</div>
+          <div class="time-grid" id="timeGrid"></div>
+        </div>
+
+        <div class="form-nav">
+          <button class="btn-back" onclick="prevStep(2)">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M7 16l-4-4m0 0l4-4m-4 4h18"/></svg>
+            Back
+          </button>
+          <button class="btn-next" onclick="nextStep(2)">
+            Enter Your Details
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- PANEL 3: Personal Details -->
+      <div class="form-panel" id="panel-3">
+        <div class="form-panel-title">Your details</div>
+        <p class="form-panel-sub">Please provide your contact information so we can confirm your booking.</p>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" placeholder="Sarah" />
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" placeholder="Miller" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" placeholder="sarah@example.com" />
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" placeholder="(555) 000-0000" />
+          </div>
+        </div>
+        <div class="form-group" id="addressGroup" style="display:none;">
+          <label for="address">Service Address</label>
+          <input type="text" id="address" placeholder="123 Main St, City, State" />
+        </div>
+        <div class="form-group">
+          <label for="referral">How did you hear about us?</label>
+          <select id="referral">
+            <option value="">Select an option</option>
+            <option>Google Search</option>
+            <option>Instagram</option>
+            <option>Facebook</option>
+            <option>Friend / Referral</option>
+            <option>TikTok</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="notes">Special Requests or Notes (optional)</label>
+          <textarea id="notes" placeholder="Anything we should know before your appointment..."></textarea>
+        </div>
+
+        <div class="form-nav">
+          <button class="btn-back" onclick="prevStep(3)">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M7 16l-4-4m0 0l4-4m-4 4h18"/></svg>
+            Back
+          </button>
+          <button class="btn-next" onclick="nextStep(3)">
+            Health Screening
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- PANEL 4: Health & Confirm -->
+      <div class="form-panel" id="panel-4">
+        <div class="form-panel-title">Health screening</div>
+        <p class="form-panel-sub">For your safety, our medical team needs a brief health history. All information is strictly confidential.</p>
+
+        <div class="form-group">
+          <label>Do any of the following apply to you?</label>
+          <div class="health-checks">
+            <label class="health-check">
+              <input type="checkbox" />
+              Kidney disease
+            </label>
+            <label class="health-check">
+              <input type="checkbox" />
+              Heart conditions
+            </label>
+            <label class="health-check">
+              <input type="checkbox" />
+              High blood pressure
+            </label>
+            <label class="health-check">
+              <input type="checkbox" />
+              G6PD deficiency
+            </label>
+            <label class="health-check">
+              <input type="checkbox" />
+              Currently pregnant
+            </label>
+            <label class="health-check">
+              <input type="checkbox" />
+              Known allergies
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-top:0.5rem;">
+          <label for="medications">Current Medications (if any)</label>
+          <input type="text" id="medications" placeholder="e.g. Lisinopril, Metformin, None" />
+        </div>
+        <div class="form-group">
+          <label for="allergies">Known Allergies</label>
+          <input type="text" id="allergies" placeholder="e.g. Penicillin, sulfa, None" />
+        </div>
+
+        <div class="consent-box">
+          <div class="consent-title">Informed Consent</div>
+          <p class="consent-text">By proceeding, you acknowledge that you have been informed about the IV therapy procedure, its potential benefits and risks, and that you have had the opportunity to ask questions. You confirm that the health information provided is accurate and complete.</p>
+          <label class="consent-label">
+            <input type="checkbox" id="consent1" />
+            I consent to receive IV therapy and confirm the health information above is accurate.
+          </label>
+        </div>
+        <div class="consent-box">
+          <label class="consent-label">
+            <input type="checkbox" id="consent2" />
+            I understand and agree to the cancellation policy: cancellations must be made at least 24 hours before my appointment to avoid a cancellation fee.
+          </label>
+        </div>
+
+        <div class="form-nav">
+          <button class="btn-back" onclick="prevStep(4)">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M7 16l-4-4m0 0l4-4m-4 4h18"/></svg>
+            Back
+          </button>
+          <button class="btn-next" onclick="submitBooking()">
+            Confirm Booking
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- SUCCESS -->
+      <div class="success-screen" id="successScreen">
+        <div class="success-icon">✓</div>
+        <div class="success-title">Booking Confirmed!</div>
+        <p class="success-sub">Your session has been reserved. A confirmation email with your booking details and pre-appointment instructions is on its way.</p>
+        <div class="success-details" id="successDetails"></div>
+        <a href="index.html" style="display:inline-flex;align-items:center;gap:0.5rem;background:var(--blue);color:white;padding:0.85rem 2rem;border-radius:50px;font-size:0.9rem;font-weight:700;text-decoration:none;">
+          Return to Home
+        </a>
+      </div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="booking-sidebar">
+
+      <!-- Summary -->
+      <div class="summary-card">
+        <div class="summary-title">Booking Summary</div>
+        <div class="summary-item">
+          <div class="summary-item-icon">💉</div>
+          <div>
+            <div class="summary-item-label">Drip Selected</div>
+            <div class="summary-item-value" id="sumDrip">Myers' Cocktail</div>
+          </div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-item-icon">📍</div>
+          <div>
+            <div class="summary-item-label">Location</div>
+            <div class="summary-item-value" id="sumLocation">In-Lounge</div>
+          </div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-item-icon">📅</div>
+          <div>
+            <div class="summary-item-label">Date & Time</div>
+            <div class="summary-item-value" id="sumDateTime">Not selected</div>
+          </div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-item-icon">⏱️</div>
+          <div>
+            <div class="summary-item-label">Duration</div>
+            <div class="summary-item-value">30–45 minutes</div>
+          </div>
+        </div>
+        <div class="summary-price-row">
+          <span class="summary-price-label">Session Total</span>
+          <span class="summary-price-amount" id="sumPrice">$175</span>
+        </div>
+      </div>
+
+      <!-- Trust -->
+      <div class="trust-card">
+        <div class="trust-card-title">Why you're in good hands</div>
+        <div class="trust-items">
+          <div class="trust-item">
+            <div class="trust-item-icon">✅</div>
+            Instant booking confirmation via email
+          </div>
+          <div class="trust-item">
+            <div class="trust-item-icon">👩‍⚕️</div>
+            Registered Nurse for every session
+          </div>
+          <div class="trust-item">
+            <div class="trust-item-icon">🧪</div>
+            Pharmacy-grade ingredients only
+          </div>
+          <div class="trust-item">
+            <div class="trust-item-icon">🔒</div>
+            Secure, private health screening
+          </div>
+          <div class="trust-item">
+            <div class="trust-item-icon">🔄</div>
+            Free cancellation up to 24 hrs
+          </div>
+          <div class="trust-item">
+            <div class="trust-item-icon">⭐</div>
+            4.9/5 average client rating
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- WHAT TO EXPECT -->
+<section class="what-to-expect">
+  <div class="what-inner">
+    <div style="text-align:center;">
+      <div style="display:inline-block;font-size:0.72rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--blue);margin-bottom:1rem;">Preparing for Your Visit</div>
+      <h2 style="font-family:var(--serif);font-size:clamp(2rem,3.2vw,3rem);font-weight:400;margin-bottom:1rem;">What to expect <em style="font-style:italic;">on the day</em></h2>
+      <p style="font-size:0.95rem;color:var(--gray-600);max-width:500px;margin:0 auto;line-height:1.75;">A few things to know before your VIVA Drip session so you can arrive relaxed and ready.</p>
+    </div>
+    <div class="expect-grid">
+      <div class="expect-card fade-up stagger-1">
+        <div class="expect-num">01</div>
+        <div class="expect-title">Arrive Well-Hydrated</div>
+        <p class="expect-text">Drink at least 16 oz of water before your session. Good baseline hydration makes it easier to find a vein and maximises your results.</p>
+      </div>
+      <div class="expect-card fade-up stagger-2">
+        <div class="expect-num">02</div>
+        <div class="expect-title">Eat a Light Meal</div>
+        <p class="expect-text">Have a light snack or meal 30–60 minutes beforehand. Arriving on an empty stomach can occasionally cause light-headedness during high-dose vitamin infusions.</p>
+      </div>
+      <div class="expect-card fade-up stagger-3">
+        <div class="expect-num">03</div>
+        <div class="expect-title">Relax & Enjoy</div>
+        <p class="expect-text">Wear comfortable clothing with short or loose sleeves for easy IV access. Bring headphones, a book, or just enjoy the peaceful lounge environment.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CANCELLATION -->
+<section class="cancellation">
+  <div class="cancellation-inner">
+    <h2 class="cancellation-title">Booking & Cancellation Policy</h2>
+    <p class="cancellation-text">We understand plans change. Our policy is designed to be flexible while respecting the time of our clinical team.</p>
+    <div class="policy-grid">
+      <div class="policy-card fade-up stagger-1">
+        <div class="policy-icon">✅</div>
+        <div class="policy-title">Free Cancellation</div>
+        <p class="policy-text">Cancel or reschedule for free up to 24 hours before your appointment — no questions asked.</p>
+      </div>
+      <div class="policy-card fade-up stagger-2">
+        <div class="policy-icon">⏰</div>
+        <div class="policy-title">Late Cancellation</div>
+        <p class="policy-text">Cancellations within 24 hours of your appointment are subject to a $40 late cancellation fee.</p>
+      </div>
+      <div class="policy-card fade-up stagger-3">
+        <div class="policy-icon">🔄</div>
+        <div class="policy-title">Rescheduling</div>
+        <p class="policy-text">You can reschedule anytime up to 24 hours before, free of charge, by calling us or via your confirmation email link.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <a href="index.html" class="footer-logo">VIVA<span>.</span>drip</a>
+    <ul class="footer-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="booking.html">Book</a></li>
+      <li><a href="index.html#faq">FAQ</a></li>
+    </ul>
+    <span class="footer-copy">© 2026 VIVA Drip. All rights reserved.</span>
+  </div>
+</footer>
+
+<script>
+  // State
+  let state = {
+    drip: "Myers' Cocktail",
+    price: 175,
+    location: 'In-Lounge',
+    date: null,
+    time: null
+  };
+
+  // NAV
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+
+  // Scroll animations
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Drip selection
+  function selectDrip(el, name, price) {
+    document.querySelectorAll('.drip-option').forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+    state.drip = name;
+    state.price = price;
+    updateSummary();
+  }
+
+  // Location
+  function setLocation(btn, loc) {
+    document.querySelectorAll('.location-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    state.location = loc;
+    const addressGroup = document.getElementById('addressGroup');
+    if (addressGroup) addressGroup.style.display = loc.includes('Mobile') ? '' : 'none';
+    updateSummary();
+  }
+
+  // Update summary
+  function updateSummary() {
+    document.getElementById('sumDrip').textContent = state.drip;
+    document.getElementById('sumLocation').textContent = state.location;
+    document.getElementById('sumPrice').textContent = '$' + state.price;
+    if (state.date && state.time) {
+      document.getElementById('sumDateTime').textContent = state.date + ' at ' + state.time;
+    }
+  }
+
+  // Step navigation
+  function nextStep(from) {
+    showPanel(from + 1);
+    markStep(from, 'completed');
+    markStep(from + 1, 'active');
+    if (from + 1 === 2) buildCalendar();
+  }
+
+  function prevStep(from) {
+    showPanel(from - 1);
+    markStep(from, '');
+    markStep(from - 1, 'active');
+  }
+
+  function showPanel(num) {
+    document.querySelectorAll('.form-panel').forEach(p => p.classList.remove('active'));
+    const panel = document.getElementById('panel-' + num);
+    if (panel) panel.classList.add('active');
+  }
+
+  function markStep(num, cls) {
+    const step = document.querySelector('.form-step[data-step="' + num + '"]');
+    if (!step) return;
+    step.classList.remove('active', 'completed');
+    if (cls) step.classList.add(cls);
+  }
+
+  // Calendar
+  function buildCalendar() {
+    const grid = document.getElementById('dateGrid');
+    grid.innerHTML = '';
+    const days = ['S','M','T','W','T','F','S'];
+    const today = new Date();
+    const month = today.getMonth();
+    const year = today.getFullYear();
+
+    for (let i = 0; i < 14; i++) {
+      const d = new Date(today);
+      d.setDate(today.getDate() + i);
+      const btn = document.createElement('button');
+      btn.className = 'date-btn';
+      const dayName = days[d.getDay()];
+      const dateNum = d.getDate();
+      btn.innerHTML = '<span class="date-btn-day">' + dayName + '</span><span class="date-btn-num">' + dateNum + '</span>';
+      if (i === 0) {
+        // First day is today — mark as slightly less available
+        btn.disabled = true;
+      } else {
+        btn.onclick = function() {
+          document.querySelectorAll('.date-btn').forEach(b => b.classList.remove('selected'));
+          btn.classList.add('selected');
+          state.date = (month + 1) + '/' + dateNum;
+          buildTimes();
+          updateSummary();
+        };
+      }
+      grid.appendChild(btn);
+    }
+  }
+
+  // Times
+  function buildTimes() {
+    const grid = document.getElementById('timeGrid');
+    const slots = ['9:00 AM','9:30 AM','10:00 AM','10:30 AM','11:00 AM','11:30 AM','12:00 PM','12:30 PM','1:00 PM','1:30 PM','2:00 PM','2:30 PM','3:00 PM','3:30 PM','4:00 PM','4:30 PM'];
+    const booked = [2, 5, 9, 12]; // random "booked" slots
+    grid.innerHTML = '';
+    slots.forEach((t, idx) => {
+      const btn = document.createElement('button');
+      btn.className = 'time-btn';
+      btn.textContent = t;
+      if (booked.includes(idx)) {
+        btn.disabled = true;
+      } else {
+        btn.onclick = function() {
+          document.querySelectorAll('.time-btn').forEach(b => b.classList.remove('selected'));
+          btn.classList.add('selected');
+          state.time = t;
+          updateSummary();
+        };
+      }
+      grid.appendChild(btn);
+    });
+  }
+
+  // Submit
+  function submitBooking() {
+    const consent1 = document.getElementById('consent1');
+    const consent2 = document.getElementById('consent2');
+    if (!consent1.checked || !consent2.checked) {
+      alert('Please agree to both consent statements to proceed.');
+      return;
+    }
+    const firstName = document.getElementById('firstName').value || 'Guest';
+
+    // Hide all panels, show success
+    document.querySelectorAll('.form-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.form-step').forEach(s => { s.classList.remove('active'); s.classList.add('completed'); });
+
+    const success = document.getElementById('successScreen');
+    const details = document.getElementById('successDetails');
+    details.innerHTML = `
+      <div class="success-detail-row">
+        <span class="success-detail-label">Drip</span>
+        <span class="success-detail-value">${state.drip}</span>
+      </div>
+      <div class="success-detail-row">
+        <span class="success-detail-label">Location</span>
+        <span class="success-detail-value">${state.location}</span>
+      </div>
+      <div class="success-detail-row">
+        <span class="success-detail-label">Date & Time</span>
+        <span class="success-detail-value">${state.date && state.time ? state.date + ' at ' + state.time : 'As scheduled'}</span>
+      </div>
+      <div class="success-detail-row">
+        <span class="success-detail-label">Total</span>
+        <span class="success-detail-value">$${state.price}</span>
+      </div>
+    `;
+    success.classList.add('visible');
+    success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+</script>
+</body>
+</html>

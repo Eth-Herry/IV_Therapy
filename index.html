@@ -1,0 +1,1758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VIVA Drip — Premium IV Therapy Lounge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white: #FFFFFF;
+      --off-white: #F8F8F6;
+      --black: #0A0A0A;
+      --charcoal: #1A1A1A;
+      --gray-100: #F3F3F1;
+      --gray-200: #E8E8E5;
+      --gray-400: #9A9A96;
+      --gray-600: #5A5A56;
+      --blue: #2563EB;
+      --blue-dark: #1D4ED8;
+      --blue-light: #EFF6FF;
+      --blue-mid: #DBEAFE;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'Inter', system-ui, sans-serif;
+      --radius: 12px;
+      --radius-lg: 20px;
+      --shadow-sm: 0 2px 12px rgba(0,0,0,0.06);
+      --shadow-md: 0 8px 32px rgba(0,0,0,0.10);
+      --shadow-lg: 0 20px 60px rgba(0,0,0,0.14);
+      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background-color: var(--off-white);
+      color: var(--black);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 0 5%;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(248,248,246,0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid transparent;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    nav.scrolled {
+      border-color: var(--gray-200);
+      box-shadow: var(--shadow-sm);
+    }
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.6rem;
+      font-weight: 500;
+      color: var(--black);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+    }
+    .nav-logo span { color: var(--blue); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--gray-600);
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      transition: color var(--transition);
+    }
+    .nav-links a:hover { color: var(--black); }
+    .nav-links a.active { color: var(--blue); }
+    .nav-cta {
+      background: var(--blue);
+      color: var(--white) !important;
+      padding: 0.55rem 1.4rem;
+      border-radius: 50px;
+      font-size: 0.85rem !important;
+      font-weight: 600 !important;
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition) !important;
+    }
+    .nav-cta:hover {
+      background: var(--blue-dark) !important;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(37,99,235,0.35) !important;
+    }
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--black);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      padding-top: 72px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      background: var(--off-white);
+    }
+    .hero-bg-pattern {
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 20% 50%, rgba(37,99,235,0.06) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(37,99,235,0.04) 0%, transparent 40%);
+      pointer-events: none;
+    }
+    .hero-grid-lines {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(37,99,235,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(37,99,235,0.04) 1px, transparent 1px);
+      background-size: 80px 80px;
+      pointer-events: none;
+    }
+    .hero-inner {
+      position: relative;
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 6rem 5% 4rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+    .hero-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--blue);
+      background: var(--blue-light);
+      padding: 0.4rem 1rem;
+      border-radius: 50px;
+      margin-bottom: 1.5rem;
+    }
+    .hero-label::before {
+      content: '';
+      display: inline-block;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--blue);
+    }
+    .hero-heading {
+      font-family: var(--serif);
+      font-size: clamp(3.2rem, 5.5vw, 5rem);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      color: var(--black);
+      margin-bottom: 1.5rem;
+    }
+    .hero-heading em {
+      font-style: italic;
+      color: var(--blue);
+    }
+    .hero-sub {
+      font-size: 1.05rem;
+      color: var(--gray-600);
+      line-height: 1.75;
+      max-width: 460px;
+      margin-bottom: 2.5rem;
+    }
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--blue);
+      color: var(--white);
+      padding: 0.85rem 2rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+      border: none;
+      cursor: pointer;
+    }
+    .btn-primary:hover {
+      background: var(--blue-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(37,99,235,0.4);
+    }
+    .btn-primary svg { transition: transform var(--transition); }
+    .btn-primary:hover svg { transform: translateX(3px); }
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: transparent;
+      color: var(--black);
+      padding: 0.85rem 2rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-decoration: none;
+      border: 1.5px solid var(--gray-200);
+      transition: border-color var(--transition), background var(--transition);
+    }
+    .btn-ghost:hover {
+      border-color: var(--black);
+      background: var(--white);
+    }
+    .hero-trust {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--gray-200);
+    }
+    .hero-trust-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+    .hero-trust-num {
+      font-family: var(--serif);
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--black);
+      line-height: 1;
+    }
+    .hero-trust-label {
+      font-size: 0.75rem;
+      color: var(--gray-400);
+      letter-spacing: 0.05em;
+    }
+    .hero-divider {
+      width: 1px;
+      height: 36px;
+      background: var(--gray-200);
+    }
+
+    /* Hero visual */
+    .hero-visual {
+      position: relative;
+    }
+    .hero-card-main {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      aspect-ratio: 4/5;
+      position: relative;
+    }
+    .hero-card-bg {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-card-photo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      z-index: 0;
+    }
+    .hero-card-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.35) 45%, transparent 100%);
+      z-index: 1;
+    }
+    .hero-card-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-card-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      background: rgba(255,255,255,0.1);
+      padding: 0.3rem 0.8rem;
+      border-radius: 50px;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 2;
+    }
+    .hero-card-title {
+      font-family: var(--serif);
+      font-size: 2.2rem;
+      font-weight: 400;
+      color: var(--white);
+      line-height: 1.2;
+      position: relative;
+      z-index: 2;
+      margin-bottom: 0.5rem;
+    }
+    .hero-card-desc {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.6);
+      position: relative;
+      z-index: 2;
+    }
+    .hero-badge {
+      position: absolute;
+      top: 1.5rem;
+      left: 1.5rem;
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 0.85rem 1.1rem;
+      box-shadow: var(--shadow-md);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--black);
+      animation: float 4s ease-in-out infinite;
+    }
+    .hero-badge-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 0 3px rgba(34,197,94,0.2);
+    }
+    .hero-badge-side {
+      position: absolute;
+      bottom: 2rem;
+      right: -1.5rem;
+      background: var(--blue);
+      border-radius: var(--radius);
+      padding: 1rem 1.25rem;
+      box-shadow: var(--shadow-md);
+      color: var(--white);
+      min-width: 140px;
+      animation: float 4s ease-in-out infinite 2s;
+      z-index: 10;
+    }
+    .hero-badge-side-num {
+      font-family: var(--serif);
+      font-size: 1.8rem;
+      font-weight: 600;
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+    .hero-badge-side-label {
+      font-size: 0.72rem;
+      opacity: 0.8;
+      line-height: 1.3;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    /* ── TRUST BAR ── */
+    .trust-bar {
+      background: var(--black);
+      padding: 1.75rem 5%;
+    }
+    .trust-bar-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4rem;
+      flex-wrap: wrap;
+    }
+    .trust-bar-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: rgba(255,255,255,0.8);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+    .trust-bar-icon {
+      width: 32px;
+      height: 32px;
+      opacity: 0.9;
+      flex-shrink: 0;
+    }
+
+    /* ── SECTION COMMONS ── */
+    section {
+      padding: 7rem 5%;
+    }
+    .section-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .section-label {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--black);
+      margin-bottom: 1.25rem;
+    }
+    .section-title em { font-style: italic; }
+    .section-sub {
+      font-size: 1rem;
+      color: var(--gray-600);
+      line-height: 1.75;
+      max-width: 540px;
+    }
+    .section-header { margin-bottom: 4rem; }
+    .section-header.centered { text-align: center; }
+    .section-header.centered .section-sub { margin: 0 auto; }
+
+    /* ── WHAT IS IV ── */
+    .what-is {
+      background: var(--white);
+    }
+    .what-is-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 7rem;
+      align-items: center;
+    }
+    .what-is-visual {
+      position: relative;
+    }
+    .what-is-img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      position: relative;
+      box-shadow: var(--shadow-lg);
+    }
+    .what-is-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+    .what-is-stat {
+      position: absolute;
+      bottom: 2rem;
+      right: -2rem;
+      background: var(--black);
+      color: var(--white);
+      padding: 1.25rem 1.5rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-md);
+    }
+    .what-is-stat-num {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--blue);
+      line-height: 1;
+    }
+    .what-is-stat-text {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.7);
+      margin-top: 0.25rem;
+    }
+    .what-is-checks {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      margin-top: 2.5rem;
+    }
+    .what-is-check {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.85rem;
+    }
+    .what-is-check-icon {
+      flex-shrink: 0;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: var(--blue-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 0.1rem;
+    }
+    .what-is-check-icon svg { color: var(--blue); }
+    .what-is-check-text {
+      font-size: 0.9rem;
+      color: var(--gray-600);
+      line-height: 1.6;
+    }
+    .what-is-check-text strong {
+      display: block;
+      color: var(--black);
+      font-weight: 600;
+      margin-bottom: 0.15rem;
+    }
+
+    /* ── SERVICES PREVIEW ── */
+    .services-preview {
+      background: var(--off-white);
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .service-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      border: 1px solid var(--gray-200);
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--blue);
+    }
+    .service-card-icon {
+      font-size: 2.2rem;
+      margin-bottom: 1.25rem;
+      display: block;
+    }
+    .service-card-tag {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 0.6rem;
+    }
+    .service-card-name {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: var(--black);
+      margin-bottom: 0.75rem;
+      line-height: 1.2;
+    }
+    .service-card-desc {
+      font-size: 0.85rem;
+      color: var(--gray-600);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+    .service-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--gray-100);
+    }
+    .service-card-price {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--black);
+    }
+    .service-card-price span {
+      font-family: var(--sans);
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: var(--gray-400);
+    }
+    .service-card-arrow {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      background: var(--blue-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background var(--transition), transform var(--transition);
+    }
+    .service-card:hover .service-card-arrow {
+      background: var(--blue);
+    }
+    .service-card:hover .service-card-arrow svg { color: white; }
+    .services-view-all {
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    /* ── HOW IT WORKS ── */
+    .how-it-works {
+      background: var(--black);
+      color: var(--white);
+    }
+    .how-it-works .section-label { color: var(--blue); }
+    .how-it-works .section-title { color: var(--white); }
+    .how-it-works .section-sub { color: rgba(255,255,255,0.6); }
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: rgba(255,255,255,0.06);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .step {
+      background: var(--charcoal);
+      padding: 2.5rem 2rem;
+      position: relative;
+      transition: background var(--transition);
+    }
+    .step:hover { background: #222; }
+    .step-num {
+      font-family: var(--serif);
+      font-size: 4rem;
+      font-weight: 300;
+      color: rgba(37,99,235,0.7);
+      line-height: 1;
+      margin-bottom: 1.5rem;
+    }
+    .step-icon {
+      width: 46px;
+      height: 46px;
+      margin-bottom: 1rem;
+    }
+    .step-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 0.75rem;
+    }
+    .step-desc {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.7;
+    }
+    .step-connector {
+      position: absolute;
+      top: 3rem;
+      right: -1px;
+      width: 1px;
+      height: 40px;
+      background: rgba(37,99,235,0.4);
+    }
+
+    /* ── WHY US ── */
+    .why-us {
+      background: var(--white);
+    }
+    .why-us-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    .why-card {
+      background: var(--off-white);
+      border-radius: var(--radius-lg);
+      padding: 2.25rem;
+      border: 1px solid transparent;
+      transition: all var(--transition);
+    }
+    .why-card:hover {
+      background: var(--white);
+      border-color: var(--blue);
+      box-shadow: var(--shadow-sm);
+      transform: translateY(-4px);
+    }
+    .why-card-icon {
+      width: 64px; height: 64px;
+      border-radius: 14px;
+      background: var(--blue-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+    .why-card-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 0.6rem;
+    }
+    .why-card-text {
+      font-size: 0.875rem;
+      color: var(--gray-600);
+      line-height: 1.7;
+    }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials {
+      background: var(--off-white);
+    }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .testimonial-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      border: 1px solid var(--gray-200);
+      transition: box-shadow var(--transition);
+    }
+    .testimonial-card:hover {
+      box-shadow: var(--shadow-md);
+    }
+    .testimonial-stars {
+      display: flex;
+      gap: 3px;
+      margin-bottom: 1.25rem;
+    }
+    .testimonial-stars span {
+      color: #F59E0B;
+      font-size: 0.9rem;
+    }
+    .testimonial-text {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      color: var(--charcoal);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .testimonial-avatar {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      flex-shrink: 0;
+    }
+    .testimonial-name {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--black);
+    }
+    .testimonial-role {
+      font-size: 0.75rem;
+      color: var(--gray-400);
+    }
+    .testimonial-verified {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.7rem;
+      color: var(--blue);
+      font-weight: 600;
+    }
+
+    /* ── TEAM ── */
+    .team {
+      background: var(--white);
+    }
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    .team-card {
+      text-align: center;
+    }
+    .team-card-img {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, #e8f0fe 0%, #c7d9f9 100%);
+      margin-bottom: 1.25rem;
+      overflow: hidden;
+      position: relative;
+    }
+    .team-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+      position: relative;
+      z-index: 1;
+    }
+    .team-card-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(37,99,235,0.1), transparent);
+    }
+    .team-card-name {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 0.25rem;
+    }
+    .team-card-role {
+      font-size: 0.8rem;
+      color: var(--blue);
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+    .team-card-creds {
+      font-size: 0.75rem;
+      color: var(--gray-400);
+    }
+
+    /* ── FAQ ── */
+    .faq {
+      background: var(--off-white);
+    }
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--gray-200);
+    }
+    .faq-question {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.25rem 0;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--black);
+      transition: color var(--transition);
+      user-select: none;
+    }
+    .faq-question:hover { color: var(--blue); }
+    .faq-chevron {
+      flex-shrink: 0;
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      border: 1.5px solid var(--gray-200);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--transition);
+      color: var(--gray-400);
+    }
+    .faq-item.open .faq-chevron {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: white;
+      transform: rotate(180deg);
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s ease;
+    }
+    .faq-item.open .faq-answer {
+      max-height: 200px;
+    }
+    .faq-answer-inner {
+      font-size: 0.875rem;
+      color: var(--gray-600);
+      line-height: 1.75;
+      padding-bottom: 1.25rem;
+    }
+    .faq-cta-box {
+      background: var(--black);
+      border-radius: var(--radius-lg);
+      padding: 3rem 2.5rem;
+      color: var(--white);
+      position: sticky;
+      top: 100px;
+    }
+    .faq-cta-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 1rem;
+    }
+    .faq-cta-title {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .faq-cta-text {
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+
+    /* ── CTA BANNER ── */
+    .cta-banner {
+      background: var(--blue);
+      padding: 6rem 5%;
+    }
+    .cta-banner-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 3rem;
+    }
+    .cta-banner-text .section-title { color: var(--white); }
+    .cta-banner-text .section-sub { color: rgba(255,255,255,0.75); max-width: 480px; }
+    .cta-banner-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: flex-end;
+      flex-shrink: 0;
+    }
+    .btn-white {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--white);
+      color: var(--blue);
+      padding: 0.9rem 2.25rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .btn-white:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    }
+    .cta-banner-note {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.6);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--charcoal);
+      padding: 5rem 5% 2rem;
+      color: rgba(255,255,255,0.7);
+    }
+    .footer-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 4rem;
+      padding-bottom: 4rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .footer-brand .nav-logo {
+      color: white;
+      display: block;
+      margin-bottom: 1rem;
+    }
+    .footer-brand-desc {
+      font-size: 0.875rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 1.5rem;
+    }
+    .footer-socials {
+      display: flex;
+      gap: 0.75rem;
+    }
+    .footer-social {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.07);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      text-decoration: none;
+      color: rgba(255,255,255,0.6);
+      transition: background var(--transition), color var(--transition);
+    }
+    .footer-social:hover {
+      background: var(--blue);
+      color: white;
+    }
+    .footer-col-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 1.25rem;
+    }
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .footer-links a {
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.55);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+    .footer-links a:hover { color: white; }
+    .footer-bottom {
+      padding-top: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.3);
+    }
+
+    /* ── ANIMATIONS ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .stagger-1 { transition-delay: 0.1s; }
+    .stagger-2 { transition-delay: 0.2s; }
+    .stagger-3 { transition-delay: 0.3s; }
+    .stagger-4 { transition-delay: 0.4s; }
+    .stagger-5 { transition-delay: 0.5s; }
+    .stagger-6 { transition-delay: 0.6s; }
+
+    /* ── MOBILE ── */
+    @media (max-width: 1024px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .hero-visual { display: none; }
+      .what-is-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .what-is-visual { display: none; }
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .steps-grid { grid-template-columns: repeat(2, 1fr); }
+      .why-us-grid { grid-template-columns: repeat(2, 1fr); }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .team-grid { grid-template-columns: repeat(2, 1fr); }
+      .faq-grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+      .cta-banner-inner { flex-direction: column; text-align: center; }
+      .cta-banner-actions { align-items: center; }
+    }
+    @media (max-width: 768px) {
+      section { padding: 5rem 5%; }
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 72px; left: 0; right: 0;
+        background: var(--off-white);
+        padding: 2rem 5%;
+        border-top: 1px solid var(--gray-200);
+        box-shadow: var(--shadow-md);
+        gap: 1.25rem;
+      }
+      .services-grid { grid-template-columns: 1fr; }
+      .steps-grid { grid-template-columns: 1fr; }
+      .why-us-grid { grid-template-columns: 1fr; }
+      .team-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+      .trust-bar-inner { gap: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">VIVA<span>.</span>drip</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="#why-us">About</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="booking.html" class="nav-cta">Book a Session</a></li>
+  </ul>
+  <div class="nav-hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-label">Medically Supervised IV Therapy</div>
+      <h1 class="hero-heading">
+        Restore.<br>
+        Revive.<br>
+        <em>Perform.</em>
+      </h1>
+      <p class="hero-sub">
+        Precision wellness delivered directly into your bloodstream. Experience 100% bioavailability of essential vitamins, minerals, and hydration — in our upscale lounge, or at your location.
+      </p>
+      <div class="hero-actions">
+        <a href="booking.html" class="btn-primary">
+          Book Your Session
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+        <a href="services.html" class="btn-ghost">
+          View All Drips
+        </a>
+      </div>
+      <div class="hero-trust">
+        <div class="hero-trust-item">
+          <span class="hero-trust-num">2,400+</span>
+          <span class="hero-trust-label">Sessions Completed</span>
+        </div>
+        <div class="hero-divider"></div>
+        <div class="hero-trust-item">
+          <span class="hero-trust-num">98%</span>
+          <span class="hero-trust-label">Client Satisfaction</span>
+        </div>
+        <div class="hero-divider"></div>
+        <div class="hero-trust-item">
+          <span class="hero-trust-num">RN-Led</span>
+          <span class="hero-trust-label">Every Session</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-badge">
+        <div class="hero-badge-dot"></div>
+        Available Today
+      </div>
+      <div class="hero-card-main">
+        <div class="hero-card-bg">
+          <img class="hero-card-photo" src="images/iv_drip.jpg" alt="IV Drip" />
+          <div class="hero-card-tag">Most Popular</div>
+          <div class="hero-card-title">Myers' Cocktail</div>
+          <div class="hero-card-desc">The original IV vitamin infusion. Trusted by thousands.</div>
+        </div>
+      </div>
+      <div class="hero-badge-side">
+        <div class="hero-badge-side-num">45 min</div>
+        <div class="hero-badge-side-label">Average session<br>duration</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-bar-inner">
+    <div class="trust-bar-item">
+      <img class="trust-bar-icon" src="images/building_white.svg" alt="" />
+      <span>Physician-Approved Protocols</span>
+    </div>
+    <div class="trust-bar-item">
+      <img class="trust-bar-icon" src="images/injection_white.svg" alt="" />
+      <span>Registered Nurse Administered</span>
+    </div>
+    <div class="trust-bar-item">
+      <img class="trust-bar-icon" src="images/lab_white.svg" alt="" />
+      <span>Pharmacy-Grade Ingredients</span>
+    </div>
+    <div class="trust-bar-item">
+      <img class="trust-bar-icon" src="images/shield_white.svg" alt="" />
+      <span>Fully Licensed & Insured</span>
+    </div>
+    <div class="trust-bar-item">
+      <img class="trust-bar-icon" src="images/star_white.svg" alt="" />
+      <span>5-Star Rated Lounge</span>
+    </div>
+  </div>
+</div>
+
+<!-- WHAT IS IV -->
+<section class="what-is">
+  <div class="section-inner">
+    <div class="what-is-grid">
+      <div class="what-is-visual">
+        <div class="what-is-img">
+          <img src="images/iv_lounge.jpg" alt="VIVA Drip IV Therapy Lounge" />
+        </div>
+        <div class="what-is-stat">
+          <div class="what-is-stat-num">100%</div>
+          <div class="what-is-stat-text">Absorption vs. ~20%<br>with oral supplements</div>
+        </div>
+      </div>
+      <div class="what-is-content fade-up">
+        <div class="section-label">What is IV Therapy</div>
+        <h2 class="section-title">Wellness at the <em>cellular level</em></h2>
+        <p class="section-sub">
+          When you swallow a vitamin, your body absorbs only a fraction of it. IV therapy bypasses the digestive system entirely — delivering nutrients directly into your bloodstream at 100% bioavailability.
+        </p>
+        <div class="what-is-checks">
+          <div class="what-is-check">
+            <div class="what-is-check-icon">
+              <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <div class="what-is-check-text">
+              <strong>Instant Hydration & Recovery</strong>
+              Rehydrate at a cellular level far faster than drinking fluids alone.
+            </div>
+          </div>
+          <div class="what-is-check">
+            <div class="what-is-check-icon">
+              <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <div class="what-is-check-text">
+              <strong>Maximum Nutrient Absorption</strong>
+              100% of every vitamin and mineral reaches your cells, nothing is wasted.
+            </div>
+          </div>
+          <div class="what-is-check">
+            <div class="what-is-check-icon">
+              <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <div class="what-is-check-text">
+              <strong>Medically Safe & Supervised</strong>
+              Every session is overseen by a licensed registered nurse using pharmacy-grade formulations.
+            </div>
+          </div>
+          <div class="what-is-check">
+            <div class="what-is-check-icon">
+              <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <div class="what-is-check-text">
+              <strong>Customised to You</strong>
+              Our formulas are tailored to your specific health goals, lifestyle, and needs.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES PREVIEW -->
+<section class="services-preview">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-label">Our Formulas</div>
+      <h2 class="section-title">Curated IV <em>Drip Menu</em></h2>
+      <p class="section-sub">Each drip is crafted by our medical team for a specific purpose. From peak performance to beauty — find your perfect infusion.</p>
+    </div>
+    <div class="services-grid">
+      <a href="services.html#myers" class="service-card fade-up stagger-1">
+        <img class="service-card-icon" src="images/stars_blue.svg" alt="" style="width:50px;height:50px;" />
+        <div class="service-card-tag">Best Seller</div>
+        <div class="service-card-name">Myers' Cocktail</div>
+        <p class="service-card-desc">The gold standard of IV therapy. A powerful blend of B vitamins, magnesium, calcium, and vitamin C that addresses a wide range of wellness needs.</p>
+        <div class="service-card-footer">
+          <div class="service-card-price">$175 <span>/ session</span></div>
+          <div class="service-card-arrow">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </div>
+        </div>
+      </a>
+      <a href="services.html#immunity" class="service-card fade-up stagger-2">
+        <img class="service-card-icon" src="images/shield_blue.svg" alt="" style="width:50px;height:50px;" />
+        <div class="service-card-tag">Immunity</div>
+        <div class="service-card-name">Immunity Shield</div>
+        <p class="service-card-desc">High-dose Vitamin C, Zinc, and immune-boosting nutrients to fortify your body's natural defences — ideal during cold & flu season or when you feel run down.</p>
+        <div class="service-card-footer">
+          <div class="service-card-price">$185 <span>/ session</span></div>
+          <div class="service-card-arrow">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </div>
+        </div>
+      </a>
+      <a href="services.html#glow" class="service-card fade-up stagger-3">
+        <img class="service-card-icon" src="images/diamond_blue.svg" alt="" style="width:50px;height:50px;" />
+        <div class="service-card-tag">Beauty</div>
+        <div class="service-card-name">Radiance &amp; Glow</div>
+        <p class="service-card-desc">Glutathione, Biotin, and Vitamin C combine to brighten skin from within, reduce oxidative stress, and support collagen production for a luminous complexion.</p>
+        <div class="service-card-footer">
+          <div class="service-card-price">$220 <span>/ session</span></div>
+          <div class="service-card-arrow">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </div>
+        </div>
+      </a>
+      <a href="services.html#energy" class="service-card fade-up stagger-4">
+        <img class="service-card-icon" src="images/lightning_blue.svg" alt="" style="width:50px;height:50px;" />
+        <div class="service-card-tag">Energy</div>
+        <div class="service-card-name">Power &amp; Energy</div>
+        <p class="service-card-desc">Supercharge your mitochondria with a high-potency blend of B-complex, amino acids, and CoQ10. Feel the difference within hours.</p>
+        <div class="service-card-footer">
+          <div class="service-card-price">$195 <span>/ session</span></div>
+          <div class="service-card-arrow">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </div>
+        </div>
+      </a>
+      <a href="services.html#recovery" class="service-card fade-up stagger-5">
+        <img class="service-card-icon" src="images/recycle_blue.svg" alt="" style="width:50px;height:50px;" />
+        <div class="service-card-tag">Recovery</div>
+        <div class="service-card-name">Rapid Recovery</div>
+        <p class="service-card-desc">Combat fatigue, muscle soreness, and dehydration. Packed with electrolytes, anti-inflammatories, and anti-nausea medication — bounce back fast.</p>
+        <div class="service-card-footer">
+          <div class="service-card-price">$165 <span>/ session</span></div>
+          <div class="service-card-arrow">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </div>
+        </div>
+      </a>
+      <a href="services.html#nad" class="service-card fade-up stagger-6">
+        <img class="service-card-icon" src="images/dna_blue.svg" alt="" style="width:50px;height:50px;" />
+        <div class="service-card-tag">Longevity</div>
+        <div class="service-card-name">NAD+ Longevity</div>
+        <p class="service-card-desc">The most advanced anti-aging infusion available. NAD+ supports cellular repair, cognitive clarity, and metabolic function at the deepest level.</p>
+        <div class="service-card-footer">
+          <div class="service-card-price">$350 <span>/ session</span></div>
+          <div class="service-card-arrow">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="services-view-all">
+      <a href="services.html" class="btn-ghost">View Full Drip Menu &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-it-works">
+  <div class="section-inner">
+    <div class="section-header centered">
+      <div class="section-label">The Process</div>
+      <h2 class="section-title">From booking to <em>bliss</em> in 4 steps</h2>
+      <p class="section-sub" style="margin:0 auto;color:rgba(255,255,255,0.55)">Simple, stress-free, and sophisticated. We've designed every touchpoint to feel as good as the treatment itself.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step fade-up stagger-1">
+        <div class="step-num">01</div>
+        <img class="step-icon" src="images/booking_white.svg" alt="" />
+        <div class="step-title">Book & Consult</div>
+        <p class="step-desc">Choose your drip and complete a brief health intake form. Our medical team reviews your goals to confirm the perfect formula.</p>
+        <div class="step-connector"></div>
+      </div>
+      <div class="step fade-up stagger-2">
+        <div class="step-num">02</div>
+        <img class="step-icon" src="images/couch_white.svg" alt="" />
+        <div class="step-title">Arrive & Relax</div>
+        <p class="step-desc">Step into our lounge — ambient lighting, plush seating, complimentary refreshments. Settle in and let the experience begin.</p>
+        <div class="step-connector"></div>
+      </div>
+      <div class="step fade-up stagger-3">
+        <div class="step-num">03</div>
+        <img class="step-icon" src="images/injection_white.svg" alt="" />
+        <div class="step-title">Infusion Begins</div>
+        <p class="step-desc">Your registered nurse places the IV and starts your personalised drip. Most sessions take 30–60 minutes. Relax, stream, or simply unwind.</p>
+        <div class="step-connector"></div>
+      </div>
+      <div class="step fade-up stagger-4">
+        <div class="step-num">04</div>
+        <img class="step-icon" src="images/glow_white.svg" alt="" />
+        <div class="step-title">Feel the Difference</div>
+        <p class="step-desc">Walk out revitalised. Many clients feel results within hours. Our team follows up to ensure you're thriving.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why-us" id="why-us">
+  <div class="section-inner">
+    <div class="section-header centered">
+      <div class="section-label">Why VIVA Drip</div>
+      <h2 class="section-title">Where <em>medical precision</em> meets luxury</h2>
+      <p class="section-sub">We don't compromise on safety, quality, or experience. Every element of VIVA Drip is designed for your trust, comfort, and results.</p>
+    </div>
+    <div class="why-us-grid">
+      <div class="why-card fade-up stagger-1">
+        <div class="why-card-icon"><img src="images/building_blue.svg" alt="" style="width:50px;height:50px;" /></div>
+        <div class="why-card-title">Physician-Approved Protocols</div>
+        <p class="why-card-text">Every IV formula is developed and approved by our licensed medical director. We follow strict clinical guidelines — your safety is never negotiable.</p>
+      </div>
+      <div class="why-card fade-up stagger-2">
+        <div class="why-card-icon"><img src="images/nurse.svg" alt="" style="width:50px;height:50px;" /></div>
+        <div class="why-card-title">Registered Nurse Administered</div>
+        <p class="why-card-text">Only licensed RNs perform your infusion. We never cut corners on credentials — you deserve the highest standard of clinical care.</p>
+      </div>
+      <div class="why-card fade-up stagger-3">
+        <div class="why-card-icon"><img src="images/lab_blue.svg" alt="" style="width:50px;height:50px;" /></div>
+        <div class="why-card-title">Pharmacy-Grade Ingredients</div>
+        <p class="why-card-text">We source exclusively from licensed compounding pharmacies. Every ingredient is pharmaceutical-grade, sterile, and properly tested.</p>
+      </div>
+      <div class="why-card fade-up stagger-4">
+        <div class="why-card-icon"><img src="images/towel.svg" alt="" style="width:50px;height:50px;" /></div>
+        <div class="why-card-title">Luxury Lounge Environment</div>
+        <p class="why-card-text">Our thoughtfully designed space pairs clinical excellence with genuine comfort. Soft lighting, private bays, and attentive service throughout.</p>
+      </div>
+      <div class="why-card fade-up stagger-5">
+        <div class="why-card-icon"><img src="images/location_blue.svg" alt="" style="width:50px;height:50px;" /></div>
+        <div class="why-card-title">In-Lounge or Mobile Service</div>
+        <p class="why-card-text">Can't come to us? We come to you. Our mobile IV service brings the full VIVA Drip experience directly to your home, hotel, or event.</p>
+      </div>
+      <div class="why-card fade-up stagger-6">
+        <div class="why-card-icon"><img src="images/recycle_blue.svg" alt="" style="width:50px;height:50px;" /></div>
+        <div class="why-card-title">Personalised Wellness Plans</div>
+        <p class="why-card-text">Ongoing clients benefit from customised treatment plans built around their health history, goals, and response to previous sessions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="section-inner">
+    <div class="section-header centered">
+      <div class="section-label">Client Stories</div>
+      <h2 class="section-title">Real results, <em>real people</em></h2>
+      <p class="section-sub">Over 2,400 sessions and counting. Here's what our clients say about the VIVA Drip experience.</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card fade-up stagger-1">
+        <div class="testimonial-stars">
+          <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+        </div>
+        <p class="testimonial-text">"I came in completely depleted after a string of long work weeks. After the Myers' Cocktail I left feeling like a completely different person — alert, light, and genuinely energised. I've booked monthly ever since."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar" style="background:linear-gradient(135deg,#2563EB,#1D4ED8)">S</div>
+          <div>
+            <div class="testimonial-name">Sarah M.</div>
+            <div class="testimonial-role">Marketing Director</div>
+          </div>
+          <div class="testimonial-verified">
+            <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            Verified
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-up stagger-2">
+        <div class="testimonial-stars">
+          <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+        </div>
+        <p class="testimonial-text">"As an athlete, recovery is everything. The Athletic Performance drip has genuinely shortened my recovery time. The team is professional, the lounge is beautiful, and the results speak for themselves."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar" style="background:linear-gradient(135deg,#0A0A0A,#333)">J</div>
+          <div>
+            <div class="testimonial-name">James T.</div>
+            <div class="testimonial-role">Professional Athlete</div>
+          </div>
+          <div class="testimonial-verified">
+            <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            Verified
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-up stagger-3">
+        <div class="testimonial-stars">
+          <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+        </div>
+        <p class="testimonial-text">"The Radiance & Glow drip is my secret weapon. My skin looks incredible, my friends keep asking what I'm doing differently. The experience itself is so luxurious — it's genuinely my favourite self-care ritual."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar" style="background:linear-gradient(135deg,#7C3AED,#5B21B6)">A</div>
+          <div>
+            <div class="testimonial-name">Amelia R.</div>
+            <div class="testimonial-role">Entrepreneur</div>
+          </div>
+          <div class="testimonial-verified">
+            <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            Verified
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team">
+  <div class="section-inner">
+    <div class="section-header centered">
+      <div class="section-label">Our Medical Team</div>
+      <h2 class="section-title">In <em>expert hands</em></h2>
+      <p class="section-sub">Every member of our clinical team is highly credentialed, extensively trained, and genuinely passionate about your wellbeing.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card fade-up stagger-1">
+        <div class="team-card-img">
+          <img src="images/michael.png" alt="Dr. Michael Chen" />
+        </div>
+        <div class="team-card-name">Dr. Michael Chen</div>
+        <div class="team-card-role">Medical Director</div>
+        <div class="team-card-creds">MD, Internal Medicine · 15 yrs experience</div>
+      </div>
+      <div class="team-card fade-up stagger-2">
+        <div class="team-card-img">
+          <img src="images/jessica.png" alt="Jessica Hartley" />
+        </div>
+        <div class="team-card-name">Jessica Hartley</div>
+        <div class="team-card-role">Lead RN, IV Specialist</div>
+        <div class="team-card-creds">BSN, RN · 8 yrs IV therapy</div>
+      </div>
+      <div class="team-card fade-up stagger-3">
+        <div class="team-card-img">
+          <img src="images/rachel.png" alt="Rachel Okafor" />
+        </div>
+        <div class="team-card-name">Rachel Okafor</div>
+        <div class="team-card-role">Registered Nurse</div>
+        <div class="team-card-creds">BSN, RN · 6 yrs emergency nursing</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="section-inner">
+    <div class="faq-grid">
+      <div>
+        <div class="section-label">Common Questions</div>
+        <h2 class="section-title" style="margin-bottom:2.5rem">Everything you <em>need to know</em></h2>
+        <div class="faq-list">
+          <div class="faq-item open">
+            <div class="faq-question">
+              Is IV therapy safe?
+              <div class="faq-chevron">
+                <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+              </div>
+            </div>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">Yes. All our treatments are physician-approved and administered by licensed registered nurses. We conduct a health intake screening before every session, and all ingredients are pharmacy-grade sterile compounds.</div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">
+              How long does a session take?
+              <div class="faq-chevron">
+                <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+              </div>
+            </div>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">Most sessions run 30–60 minutes depending on the drip. NAD+ sessions are longer at 2–4 hours due to the infusion rate requirements. You're welcome to relax, use your phone, or simply rest during your session.</div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">
+              Will I feel it during the infusion?
+              <div class="faq-chevron">
+                <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+              </div>
+            </div>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">Most clients feel a mild coolness at the insertion site and sometimes a slight vitamin taste. It's generally very comfortable. Our nurses are experts at ensuring minimal discomfort and will monitor you throughout.</div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">
+              How often should I come?
+              <div class="faq-chevron">
+                <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+              </div>
+            </div>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">It depends on your goals. Many clients come once or twice per month for general wellness. Athletes or those recovering from illness may benefit from more frequent sessions. Our medical team will help you build a personalised plan.</div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">
+              Do you offer mobile or at-home service?
+              <div class="faq-chevron">
+                <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+              </div>
+            </div>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">Absolutely. Our mobile service brings the full VIVA Drip experience to your home, hotel, or private event. Mobile bookings are available with 24-hour advance notice. A travel fee may apply depending on distance.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="faq-cta-box">
+          <div class="faq-cta-tag">Ready to Start?</div>
+          <h3 class="faq-cta-title">Your first session is waiting</h3>
+          <p class="faq-cta-text">Book online in under 2 minutes. Choose your drip, select a time, and our team will take care of the rest. No membership required.</p>
+          <a href="booking.html" class="btn-primary">Book Now &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="cta-banner">
+  <div class="cta-banner-inner">
+    <div class="cta-banner-text">
+      <div class="section-label" style="color:rgba(255,255,255,0.7)">Limited Availability</div>
+      <h2 class="section-title">Ready to <em style="color:rgba(255,255,255,0.75)">feel your best?</em></h2>
+      <p class="section-sub">Join thousands of clients who've made IV therapy part of their wellness routine. Book today — slots fill quickly.</p>
+    </div>
+    <div class="cta-banner-actions">
+      <a href="booking.html" class="btn-white">Book Your Session</a>
+      <span class="cta-banner-note">No membership required · Cancel up to 24 hrs</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">VIVA<span>.</span>drip</a>
+        <p class="footer-brand-desc">Premium IV therapy administered by registered nurses in a luxury lounge environment. Wellness delivered at the cellular level.</p>
+        <div class="footer-socials">
+          <a href="#" class="footer-social">📷</a>
+          <a href="#" class="footer-social">💼</a>
+          <a href="#" class="footer-social">𝕏</a>
+          <a href="#" class="footer-social">▶</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Services</div>
+        <ul class="footer-links">
+          <li><a href="services.html#myers">Myers' Cocktail</a></li>
+          <li><a href="services.html#immunity">Immunity Shield</a></li>
+          <li><a href="services.html#glow">Radiance & Glow</a></li>
+          <li><a href="services.html#energy">Power & Energy</a></li>
+          <li><a href="services.html#nad">NAD+ Longevity</a></li>
+          <li><a href="services.html">View All</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-links">
+          <li><a href="#why-us">About Us</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#">Our Team</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Press</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <ul class="footer-links">
+          <li><a href="#">📍 123 Wellness Ave, Suite 200</a></li>
+          <li><a href="#">📞 (555) 000-1234</a></li>
+          <li><a href="#">✉️ hello@vivadrip.com</a></li>
+          <li><a href="#">🕐 Mon–Sat 8am–8pm</a></li>
+          <li><a href="#">🕐 Sun 9am–6pm</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 VIVA Drip. All rights reserved.</span>
+      <span>Privacy Policy · Terms of Service · Medical Disclaimer</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // NAV scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Hamburger
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+  });
+
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-question').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.parentElement;
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    });
+  });
+</script>
+</body>
+</html>
